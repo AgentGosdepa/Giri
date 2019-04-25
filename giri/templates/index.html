@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block title %}Index{% endblock title %}
+{% block header %}<!--Главнаяs-->{% endblock header %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <form method="POST" action="/">
+        {% csrf_token %}
+        <p>
+        	<label>Введите фамилию</label>
+        	<input type="text" name="surname" />
+
+            <label>Введите имя</label>
+            <input type="text" name="name" />
+
+        	<label>Введите отчество</label>
+        	<input type="text" name="patronymic" />
+        <input type="submit" value="Найти" >
+                </p>
+    </form>  
+
+    {% if sportsmens.count > 0 %}
+    <h2>Список спортсменов</h2>
+    <table>
+	    <tr>
+            <td>Фамилия</td>
+            <td>Имя</td>
+            <td>Отчество</td>
+            <td>Регион</td>
+            <td>День рождения</td>
+            <td>Категория</td>
+	    </tr>
+
+        {% for sportsmen in sportsmens %}
+	        		        
+		        <tr>
+            <td>{{ sportsmen.surname }}</td>
+            <td>{{ sportsmen.name }}</td>
+            <td>{{ sportsmen.patronymic }}</td>
+            <td>{{ sportsmen.region }}</td>
+            <td>{{ sportsmen.dateofbirth }}</td>
+            <td>{{ sportsmen.category }}</td>
+		        </tr>
+
+        {% endfor %}
+    </table>
+    {% endif %}    
+
+{% endblock content %}
