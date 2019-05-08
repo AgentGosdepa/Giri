@@ -18,9 +18,16 @@ from django.urls import path
 from giri import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
+
+    path('sportsmens/', views.sportsmens),
+    path('competitions/', views.competitions),
+    path('judges/', views.judges),
+    path('sj/', views.sj),
+    path('adduser/', views.adduser),
     path('administrator/', views.admin),
     path('operator/', views.operator),
+    path('contact/', views.contactView),
     path('judge/', views.judge),
     path('', views.index),
 ]

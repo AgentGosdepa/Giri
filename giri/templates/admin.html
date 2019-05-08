@@ -6,6 +6,16 @@
 
 {% block content %}
 
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" formaction="/adduser/">Пользователи</button>
+    <button type="submit" formaction="/sportsmens/">Спортсмены</button>
+    <button type="submit" formaction="/judges/">Судьи</button>
+    <button type="submit" formaction="/competitions/">Соревнования</button>
+</form>
+
+
 <table>
     <tr>
         <td>
