@@ -94,7 +94,8 @@ def admin(request):
 			mastername = mastername,
 			mastersurname = mastersurname, 
 			masterpatronymic = masterpatronymic, 
-			discipline = discipline)	
+			discipline = discipline,
+			platform = 0)	
 #********************************************
 		elif ('delete_sportsmen' in request.POST):
 			Sportsmen.objects.get(id = request.POST.get("delete_sp")).delete()
@@ -260,4 +261,40 @@ def sj(request):
 
 def adduser(request):
 	pass
+
+def dashboard_get(request):
+	if request.method == "GET":
+		platform_id = request.GET.get("platform")
+		competition_id = request.GET.get("competition")
+
+		try:
+			results = Result.objects.filter(platform = platform_id, competitionid = competition_id)
+			sportsmen = dict()
+			for result in results:
+				sportsmen[str(result.sportsmenid.id)] = result.sportsmenid.name + " " + result.sportsmenid.surname + " " + result.sportsmenid.patronymic
+			
+			answer = HttpResponse()
+			answer.write(sportsmen)
+			return answer
+
+		except ObjectDoesNotExist:
+			return HttpResponse("Not found")			
+	else:
+		return HttpResponse("GET REQUEST REQUIRED!")
+
+def dashboard_set(request):
+	if request.method == "GET":
+		sportsmen_id = request.GET.get("sportsmenid")
+		competition_id = request.GET.get("competition")
+		result_count = request.GET.get("result")
+
+		try:
+			result = Result.objects.get(sportsmenid = sportsmen_id, competitionid = competition_id)
+			result.result = result_count
+			result.save()
+			return HttpResponse("ADDED!")
+		except ObjectDoesNotExist:
+			return HttpResponse("NOT FOUND!")
+	else:
+		return HttpResponse("GET REQUEST REQUIRED!")
 

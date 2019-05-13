@@ -19,7 +19,8 @@ from giri import views
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-
+    path('dashboard_get/', views.dashboard_get),
+    path('dashboard_set/', views.dashboard_set),
     path('sportsmens/', views.sportsmens),
     path('competitions/', views.competitions),
     path('judges/', views.judges),

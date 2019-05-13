@@ -28,3 +28,4 @@ class Result(models.Model):
 	mastersurname = models.CharField(max_length = 30)
 	masterpatronymic = models.CharField(max_length = 30)
 	discipline = models.CharField(max_length = 30)
+	platform = models.IntegerField()
