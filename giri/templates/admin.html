@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
 {% block title %}Admin{% endblock title %}
 {% block header %}<!--Главнаяs-->{% endblock header %}
@@ -6,20 +5,10 @@
 
 {% block content %}
 
-
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit" formaction="/adduser/">Пользователи</button>
-    <button type="submit" formaction="/sportsmens/">Спортсмены</button>
-    <button type="submit" formaction="/judges/">Судьи</button>
-    <button type="submit" formaction="/competitions/">Соревнования</button>
-</form>
-
-
 <table>
     <tr>
         <td>
-            <form method="POST" action="/administrator/">
+            <form method="POST">
                 {% csrf_token %}
                 <p>
                     <table border="1">
@@ -55,7 +44,7 @@
         </td> 
 <!-- ************************************************************************ -->
         <td>
-            <form method="POST" action="/administrator/">
+            <form method="POST">
                 {% csrf_token %}
                 <p>
                     <table border="1">
@@ -79,7 +68,7 @@
         </td>            
 <!-- ************************************************************************ -->
         <td>
-            <form method="POST" action="/administrator/">
+            <form method="POST">
                 {% csrf_token %}
                 <p>
                     <table border="1">
@@ -102,7 +91,7 @@
         </td>
 <!-- ************************************************************************ -->
         <td>
-            <form method="POST" action="/administrator/">
+            <form method="POST">
                 {% csrf_token %}
                 <p>
                     <table border="1">
@@ -172,7 +161,7 @@
             <td>{{ sportsmen.dateofbirth }}</td>
             <td>{{ sportsmen.category }}</td>
             <td>
-                <form method="POST" action="/administrator/">
+                <form method="POST">
                     {% csrf_token %}
                     <p>
                     <input type="hidden" name="delete_sp" value={{ sportsmen.id }}>
@@ -203,7 +192,7 @@
             <td>{{ competition.place }}</td>
             <td>{{ competition.status }}</td>
             <td>
-                <form method="POST" action="/administrator/">
+                <form method="POST">
                     {% csrf_token %}
                     <p>
                     <input type="hidden" name="delete_comp" value={{ competition.id }}>
@@ -234,7 +223,7 @@
             <td>{{ judge.judgename }}</td>
             <td>{{ judge.judgepatronymic }}</td>
             <td>
-                <form method="POST" action="/administrator/">
+                <form method="POST">
                     {% csrf_token %}
                     <p>
                     <input type="hidden" name="delete_jud" value={{ judge.id }}>
@@ -275,7 +264,7 @@
             <td>{{ result.masterpatronymic }}</td>
             <td>{{ result.discipline }}</td>
             <td>
-                <form method="POST" action="/administrator/">
+                <form method="POST">
                     {% csrf_token %}
                     <p>
                     <input type="hidden" name="delete_res" value={{ result.id }}>

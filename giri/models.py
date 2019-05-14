@@ -9,7 +9,7 @@ class Sportsmen(models.Model):
 	dateofbirth = models.DateField(default = date.today())
 	category = models.CharField(max_length = 30)
 
-class Compitition(models.Model):
+class Competition(models.Model):
 	date = models.DateField(default = date.today())
 	place = models.CharField(max_length = 30)
 	status = models.CharField(max_length = 30)
@@ -21,7 +21,7 @@ class Judge(models.Model):
 
 class Result(models.Model):
 	sportsmenid = models.ForeignKey(Sportsmen, on_delete = models.CASCADE)
-	competitionid = models.ForeignKey(Compitition, on_delete = models.CASCADE)
+	competitionid = models.ForeignKey(Competition, on_delete = models.CASCADE)
 	judgeid = models.ForeignKey(Judge, on_delete = models.CASCADE)
 	result = models.IntegerField()
 	mastername = models.CharField(max_length = 30)

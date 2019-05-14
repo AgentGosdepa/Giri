@@ -19,16 +19,11 @@ from giri import views
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
+    path('contact/', views.contactView),
     path('dashboard_get/', views.dashboard_get),
     path('dashboard_set/', views.dashboard_set),
-    path('sportsmens/', views.sportsmens),
-    path('competitions/', views.competitions),
-    path('judges/', views.judges),
-    path('sj/', views.sj),
-    path('adduser/', views.adduser),
-    path('administrator/', views.admin),
     path('operator/', views.operator),
-    path('contact/', views.contactView),
-    path('judge/', views.judge),
+    path('judge/', views.judge),    
+    path('admin/', views.admin),
     path('', views.index),
 ]

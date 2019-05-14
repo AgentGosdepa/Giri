@@ -10,26 +10,31 @@ from .form import *
 def index(request):
 	if request.method == "POST":
 		if ('find' in request.POST):
-			nsp = request.POST.get("nsp")
-			name = str()
-			surname = str()
-			patronymic = str()
+			name = request.POST.get("name")
+			surname = request.POST.get("surname")
+			patronymic = request.POST.get("patronymic")
 
-			flag = 0
-			for i in nsp:
-				if (i == ' '):
-					flag += 1
-					continue
-				if flag == 0:
-					name += i
-				if flag == 0:
-					surname += i
-				if flag == 0:
-					patronymic += i				
-
-			sportsmens = Sportsmen.objects.filter(name = name, surname = surname, patronymic = patronymic)
+			sportsmens = Sportsmen.objects.none()
+			if not name == '':
+				if not surname == '':
+					if not patronymic == '':
+						sportsmens = Sportsmen.objects.filter(name = name, surname = surname, patronymic = patronymic)
+					else:
+						sportsmens = Sportsmen.objects.filter(name = name, surname = surname)
+				elif not patronymic == '':
+					sportsmens = Sportsmen.objects.filter(name = name, patronymic = patronymic)
+				else:
+					sportsmens = Sportsmen.objects.filter(name = name)
+			else:
+				if not surname == '':
+					if not patronymic == '':
+						sportsmens = Sportsmen.objects.filter(surname = surname, patronymic = patronymic)
+					else:
+						sportsmens = Sportsmen.objects.filter(surname = surname)
+				elif not patronymic == '':
+					sportsmens = Sportsmen.objects.filter(patronymic = patronymic)
+			
 			results = Result.objects.none()
-
 			for sportsmen in sportsmens:
 				results |= Result.objects.filter(sportsmenid = sportsmen)
 			return render(request, "index.html", {"sportsmens": sportsmens, "results": results})
@@ -64,7 +69,7 @@ def admin(request):
 			place = 				request.POST.get("place")
 			status = 				request.POST.get("status")
 
-			competition = Compitition.objects.create(date = date, 
+			competition = Competition.objects.create(date = date, 
 			place = place,
 			status = status)	
 #********************************************	
@@ -88,7 +93,7 @@ def admin(request):
 			discipline = 			request.POST.get("discipline")
 
 			result = Result.objects.create(sportsmenid = Sportsmen.objects.get(id = sportsmenid),
-			competitionid = Compitition.objects.get(id = competitionid),
+			competitionid = Competition.objects.get(id = competitionid),
 			judgeid = Judge.objects.get(id = judgeid),
 			result = result, 
 			mastername = mastername,
@@ -101,7 +106,7 @@ def admin(request):
 			Sportsmen.objects.get(id = request.POST.get("delete_sp")).delete()
 #********************************************	
 		elif ('delete_competition' in request.POST):
-			Compitition.objects.get(id = request.POST.get("delete_comp")).delete()
+			Competition.objects.get(id = request.POST.get("delete_comp")).delete()
 #********************************************	
 		elif ('delete_judge' in request.POST):
 			Judge.objects.get(id = request.POST.get("delete_jud")).delete()
@@ -110,77 +115,16 @@ def admin(request):
 			Result.objects.get(id = request.POST.get("delete_res")).delete()
 #********************************************	
 		return render(request, "admin.html", {"sportsmens": Sportsmen.objects.all(),
-			"competitions": Compitition.objects.all(), "judges": Judge.objects.all(),
+			"competitions": Competition.objects.all(), "judges": Judge.objects.all(),
 			"results": Result.objects.all()})
 	else:
 		return render(request, "admin.html", {"sportsmens": Sportsmen.objects.all(),
-			"competitions": Compitition.objects.all(), "judges": Judge.objects.all(),
+			"competitions": Competition.objects.all(), "judges": Judge.objects.all(),
 			"results": Result.objects.all()})
     
-
 #********************************************************************************* 
 def operator(request):
-	if request.method == "POST":
-		if ('submit1' in request.POST):
-			name = 					request.POST.get("name")
-			surname = 				request.POST.get("surname")
-			patronymic = 			request.POST.get("patronymic")
-			region = 				request.POST.get("region")
-			dateofbirth = 			request.POST.get("birthday")
-			category = 				request.POST.get("category")
-
-			sportsmen = Sportsmen.objects.create(name = name,
-			surname = surname,
-			patronymic = patronymic,
-			region = region,
-			dateofbirth = dateofbirth,
-			category = category)
-#********************************************	
-		elif ('submit2' in request.POST):
-			date =					request.POST.get("date")
-			place = 				request.POST.get("place")
-			status = 				request.POST.get("status")
-
-			competition = Compitition.objects.create(date = date, 
-			place = place,
-			status = status)	
-#********************************************	
-		elif ('submit3' in request.POST):
-			judgename = 			request.POST.get("judgename")
-			judgesurname = 			request.POST.get("judgesurname")
-			judgepatronymic = 		request.POST.get("judgepatronymic")
-
-			judge = Judge.objects.create(judgename = judgename,
-			judgesurname = judgesurname,
-			judgepatronymic = judgepatronymic)
-#********************************************		
-		elif ('submit4' in request.POST):
-			sportsmenid = 			request.POST.get("sportsmenid")
-			competitionid = 		request.POST.get("competitionid")
-			judgeid = 				request.POST.get("judgeid")
-			#result = 				request.POST.get("result")
-			result = 				0
-			mastername = 			request.POST.get("mastername")
-			mastersurname = 		request.POST.get("mastersurname")
-			masterpatronymic = 		request.POST.get("masterpatronymic")
-			discipline = 			request.POST.get("discipline")
-
-			result = Result.objects.create(sportsmenid = Sportsmen.objects.get(id = sportsmenid),
-			competitionid = Compitition.objects.get(id = competitionid),
-			judgeid = Judge.objects.get(id = judgeid),
-			result = result, 
-			mastername = mastername,
-			mastersurname = mastersurname, 
-			masterpatronymic = masterpatronymic, 
-			discipline = discipline)			
-#********************************************	
-		return render(request, "operator.html", {"sportsmens": Sportsmen.objects.all(),
-			"competitions": Compitition.objects.all(), "judges": Judge.objects.all(),
-			"results": Result.objects.all()})
-	else:
-		return render(request, "operator.html", {"sportsmens": Sportsmen.objects.all(),
-			"competitions": Compitition.objects.all(), "judges": Judge.objects.all(),
-			"results": Result.objects.all()})
+	return render(request, "operator.html")
 
 #*********************************************************************************
 def judge(request):
@@ -200,67 +144,6 @@ def contactView(request):
 		form = ContactForm()
 	#Отправляем форму на страницу
 		return render(request, 'contact.html', {'form': form})
-
-
-def sportsmens(request):
-	if request.method == "POST":
-		if ('submit1' in request.POST):
-			name = 					request.POST.get("name")
-			surname = 				request.POST.get("surname")			
-			patronymic = 			request.POST.get("patronymic")
-			region = 				request.POST.get("region")
-			dateofbirth = 			request.POST.get("birthday")
-			category = 				request.POST.get("category")
-
-			sportsmen = Sportsmen.objects.create(name = name,
-			surname = surname,			patronymic = patronymic,
-			region = region,
-			dateofbirth = dateofbirth,
-			category = category)
-
-		elif ('delete_sportsmen' in request.POST):
-			Sportsmen.objects.get(id = request.POST.get("delete_sp")).delete()
-
-	return render(request, 'sportsmens.html', {"sportsmens": Sportsmen.objects.all()})
-
-def competitions(request):
-	if request.method == "POST":
-		if ('submit2' in request.POST):
-			date =					request.POST.get("date")
-			place = 				request.POST.get("place")
-			status = 				request.POST.get("status")
-
-			competition = Compitition.objects.create(date = date, 
-			place = place,
-			status = status)
-
-		elif ('delete_competition' in request.POST):
-			Compitition.objects.get(id = request.POST.get("delete_comp")).delete()
-						
-	return render(request, 'competitions.html', {"competitions": Competition.objects.all()})
-
-def judges(request):
-	if request.method == "POST":
-		if ('submit3' in request.POST):
-			judgename = 			request.POST.get("judgename")
-			judgesurname = 			request.POST.get("judgesurname")
-			judgepatronymic = 		request.POST.get("judgepatronymic")
-
-			judge = Judge.objects.create(judgename = judgename,
-			judgesurname = judgesurname,
-			judgepatronymic = judgepatronymic)
-
-		elif ('delete_judge' in request.POST):
-			Judge.objects.get(id = request.POST.get("delete_jud")).delete()
-
-	return render(request, 'judges.html', {"judges": Judge.objects.all()})
-
-def sj(request):	
-	pass
-
-
-def adduser(request):
-	pass
 
 def dashboard_get(request):
 	if request.method == "GET":
