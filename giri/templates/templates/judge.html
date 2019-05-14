@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block title %}Judge{% endblock title %}
+{% block header %}<!--Главнаяs-->{% endblock header %}
+{% load staticfiles %}
+
+{% block content %}
+<nav class="navbar navbar-default bg-secondary">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">Giri</a>
+        </div>
+    </div>
+</nav>
+
+    <form method="POST" action="/administrator/">
+        {% csrf_token %}
+        <p>
+        <table>
+            <tr>
+<!-- ************************************************************************ -->
+                <td>
+                    <table border="1">
+                        <h2>Таблца Результат</h2>
+                        <tr>
+                            <td><label>Фамилия тренера</label></td>
+                            <td><input type="text" name="mastersurname" /></td>
+                        </tr>
+                        <tr>
+                            <td><label>Имя тренера</label></td>
+                            <td><input type="text" name="mastername" /></td>
+                        </tr>
+                        <tr>
+                            <td><label>Отчество тренера</label></td>
+                            <td><input type="text" name="masterpatronymic" /></td>
+                        </tr>
+                        <tr>
+                            <td><label>Результат</label></td>
+                            <td><input type="number" name="result" /></td>
+                        </tr>
+                        <tr>                                
+                            <td><label>Дисциплина</label></td>
+                            <td><input type="text" name="discipline" /></td>
+                        </tr>
+                        <tr>
+                            <td><label>ID соревнования</label></td>
+                            <td><input type="number" name="competitionid" /></td>
+                        </tr>
+                        <tr>
+                            <td><label>ID спортсмена</label></td>
+                            <td><input type="number" name="sportsmenid" /></td>
+                        </tr>
+                        <tr>
+                            <td><label>ID судьи</label></td>
+                            <td><input type="number" name="judgeid" /></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+<!-- ************************************************************************ -->
+        <input type="submit" value="Сохранить" >
+        </p>
+    </form>  
+
+    {% if sportsmens.count > 0 %}
+    <h2>Список спортсменов</h2>
+    <table border="1"> 
+        <tr>
+            <td>ID</td>
+            <td>Фамилия</td>
+            <td>Имя</td>
+            <td>Отчество</td>
+        </tr>
+
+        {% for sportsmen in sportsmens %}
+        <tr>
+            <td>{{ sportsmen.id }}</td>
+            <td>{{ sportsmen.surname }}</td>
+            <td>{{ sportsmen.name }}</td>
+            <td>{{ sportsmen.patronymic }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if results.count > 0 %}
+    <h2>Результат</h2>
+    <table border="1"> 
+        <tr>
+            <td>ID</td>
+            <td>ID спортсмена</td>
+            <td>ID соревнования</td>
+            <td>ID судьи</td>
+            <td>Результат</td>
+            <td>Фамилия</td>
+            <td>Имя</td>
+            <td>Отчество</td>
+            <td>Дисциплина</td>
+        </tr>
+
+        {% for result in results %}
+        <tr>
+            <td>{{ result.id }}</td>
+            <td>{{ result.sportsmenid }}</td>
+            <td>{{ result.competitionid }}</td>
+            <td>{{ result.judgeid }}</td>
+            <td>{{ result.result }}</td>
+            <td>{{ result.mastername }}</td>
+            <td>{{ result.mastersurname }}</td>
+            <td>{{ result.masterpatronymic }}</td>
+            <td>{{ result.discipline }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+{% endblock content %}

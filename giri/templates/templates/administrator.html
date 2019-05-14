@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock title %}
+{% block header %}<!--Главнаяs-->{% endblock header %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="my-3 my-md-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">Поиск по спортсмену</h3>
+					</div>
+					<div class="card-body">
+						<div class="text-wrap">
+							<p class="text-justify">Данная форма позволяет произвести поиск по базе данных спортсменов, 
+							для того, чтобы узнать информацию о спортсмене, результатах и выступлений.
+							</p>
+							
+						<form method="POST" action="/">
+							{% csrf_token %}
+							<div class="form-group">
+								<label class="form-label">Фамилия</label>
+								<input type="text" class="form-control" name="nsp" placeholder="Иванов">
+								<label class="form-label">Имя</label>
+								<input type="text" class="form-control" name="example-text-input" placeholder="Иван">
+								<label class="form-label">Отчество</label>
+								<input type="text" class="form-control" name="example-text-input" placeholder="Иванович">
+							</div>
+							<div class="card-footer text-right">
+								<div class="d-flex">
+									<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+									<button type="submit" class="btn btn-primary ml-auto" name="find">Показать</button>
+								</div>
+							</div>
+						</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-8">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">База данных спортсменов и результатов</h3>
+				</div>
+				<div class="card-body">
+					<div class="text-wrap">
+						<!-- DEBUG -->
+						<p class="text-justify">Debug links:
+						<a href="/judge/">Судья</a>
+						<a href="/operator/">Оператор</a>
+						<a href="/administrator/">Администратор</a></p>
+						<!-- DEBUG -->
+							<form>
+							{% if sportsmens.count > 0 %}
+							<table class="table table-bordered">
+							<thead>
+								<tr>
+									<td>Фамилия</td>
+									<td>Имя</td>
+									<td>Отчество</td>
+									<td>Регион</td>
+									<td>День рождения</td>
+									<td>Категория</td>
+								</tr>
+							</thead>
+							{% for sportsmen in sportsmens %}                     
+							<tbody>
+								<tr>
+									{% for result in results %}
+									{% if result.sportsmenid.id == sportsmen.id %}
+									<td>{{ sportsmen.surname }}</td>
+									<td>{{ sportsmen.name }}</td>
+									<td>{{ sportsmen.patronymic }}</td>
+									<td>{{ sportsmen.region }}</td>
+									<td>{{ sportsmen.dateofbirth }}</td>
+									<td>{{ sportsmen.category }}</td>
+									{% endif%}
+									{% endfor %}
+								</tr>
+							</tbody>
+							{% endfor %}
+						</table>
+						{% endif %}
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div class="container-fluid" style="padding-top: 30px">
+				<form method="POST" action="/">
+				{% csrf_token %}
+				<input type="text" class="form" name="login" placeholder="Login" />
+				<input type="text" class="form" name="password" placeholder="Password" />
+				<input type="submit" class="btn btn-primary ml-auto" value="Войти" name="signin">
+				</form>
+			</div>
+	</div>
+</div>
+{% endblock content %}
