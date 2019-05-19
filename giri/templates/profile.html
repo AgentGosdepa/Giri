@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock title %}
+{% block header %}<!--Главнаяs-->{% endblock header %}
+{% load staticfiles %}
+
+{% block content %}
+
+<!--вывод информации о спортсмене и результатах соревнований-->
+
+<div class="my-3 my-md-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="card-body">
+						<div class="card-body text-center">
+							<h3 class="mb-3">
+								Имя Фамилия Отчество
+							</h3>
+							<p class="mb-4">
+								Категория: 1
+							</p>
+							<p class="mb-4">
+								Регион: Томская область
+							</p>
+							<p class="mb-4">
+								День рождения: May 2, 2019
+							</p>
+						</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-8">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Результаты</h3>
+				</div>
+				<div class="card-body">
+					<div class="text-wrap">
+					<!--  -->
+					
+					<!-- ТАБЛИЦА -->
+					{% if competitions.count > 0 %}
+					<table class="table table-bordered"> 
+						<tr>
+							<td>ID</td>
+							<td>Дата</td>
+							<td>Место</td>
+							<td>Статус</td>
+						</tr>
+						{% for competition in competitions %}
+						<tr>
+							<td>{{ competition.id }}</td>
+							<td>{{ competition.date }}</td>
+							<td>{{ competition.place }}</td>
+							<td>{{ competition.status }}</td>           
+						</tr>
+					{% endfor %}
+					</table>
+					{% endif %}
+					<!-- ТАБЛИЦА -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

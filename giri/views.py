@@ -185,3 +185,6 @@ def dashboard_set(request):
 def login(request):
     return render(request, "login.html")
 
+# Profile form page
+def profile(request):
+    return render(request, "profile.html", {"results": Result.objects.all()})

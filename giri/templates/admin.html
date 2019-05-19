@@ -76,9 +76,7 @@
 										<table class="table table-bordered"> 
 											<tr>
 												<td>ID</td>
-												<td>Фамилия</td>
 												<td>Имя</td>
-												<td>Отчество</td>
 												<td>Регион</td>
 												<td>День рождения</td>
 												<td>Категория</td>
@@ -87,9 +85,9 @@
 											{% for sportsmen in sportsmens %}
 											<tr>
 												<td>{{ sportsmen.id }}</td>
-												<td>{{ sportsmen.surname }}</td>
-												<td>{{ sportsmen.name }}</td>
-												<td>{{ sportsmen.patronymic }}</td>
+												<td>{{ sportsmen.surname }}
+												{{ sportsmen.name }}
+												{{ sportsmen.patronymic }}</td>
 												<td>{{ sportsmen.region }}</td>
 												<td>{{ sportsmen.dateofbirth }}</td>
 												<td>{{ sportsmen.category }}</td>
@@ -256,9 +254,7 @@
 												<td>ID Соревнов.</td>
 												<td>ID Суьи</td>
 												<td>Результат</td>
-												<td>Фамилия</td>
 												<td>Имя</td>
-												<td>Отчество</td>
 												<td>Дисциплина</td>
 												<td></td>
 											</tr>
@@ -270,9 +266,9 @@
 												<td>{{ result.competitionid.id }}</td>
 												<td>{{ result.judgeid.id }}</td>
 												<td>{{ result.result }}</td>
-												<td>{{ result.mastername }}</td>
-												<td>{{ result.mastersurname }}</td>
-												<td>{{ result.masterpatronymic }}</td>
+												<td>{{ result.mastername }}
+												{{ result.mastersurname }}
+												{{ result.masterpatronymic }}</td>
 												<td>{{ result.discipline }}</td>
 												<td>
 													<form method="POST">
@@ -343,18 +339,16 @@
 										<table class="table table-bordered"> 
 											<tr>
 												<td>ID</td>
-												<td>Фамилия</td>
 												<td>Имя</td>
-												<td>Отчество</td>
-												<td></td>
+
 											</tr>
 
 											{% for judge in judges %}
 											<tr>
 												<td>{{ judge.id }}</td>
-												<td>{{ judge.judgesurname }}</td>
-												<td>{{ judge.judgename }}</td>
-												<td>{{ judge.judgepatronymic }}</td>
+												<td>{{ judge.judgesurname }}
+												{{ judge.judgename }}
+												{{ judge.judgepatronymic }}</td>
 												<td>
 													<form method="POST">
 														{% csrf_token %}
