@@ -1,280 +1,103 @@
 {% extends "base.html" %}
 {% block title %}Admin{% endblock title %}
-{% block header %}<!--Главнаяs-->{% endblock header %}
+{% block header %}<!--Главная-->{% endblock header %}
 {% load staticfiles %}
 
 {% block content %}
 
-<table>
-    <tr>
-        <td>
-            <form method="POST">
-                {% csrf_token %}
-                <p>
-                    <table border="1">
-                        <h2>Таблца Спортсмен</h2>
-                        <tr>
-                            <td><label>Фамилия</label></td>
-                            <td><input type="text" name="surname" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Имя</label></td>
-                            <td><input type="text" name="name" /></td>
-                        </tr>
-                        <tr>
-                        	<td><label>Отчество</label></td>
-                        	<td><input type="text" name="patronymic" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Регион</label></td>
-                            <td><input type="text" name="region" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Категория</label></td>
-                            <td><input type="text" name="category" /></td>
-                        </td>
-                        <tr>
-                            <td><label>День рождения</label></td>
-                            <td><input type="date" name="birthday" /></td>
-                        </tr>
-                    </table>
-                <input type="submit" value="Сохранить" name="submit1">
-                </p>
-            </form> 
-        </td> 
-<!-- ************************************************************************ -->
-        <td>
-            <form method="POST">
-                {% csrf_token %}
-                <p>
-                    <table border="1">
-                        <h2>Таблца Соревнование</h2>
-                        <tr>
-                            <td><label>Дата проведения</label></td>
-                            <td><input type="date" name="date" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Место</label></td>
-                            <td><input type="text" name="place" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Статус соревнований</label></td>
-                            <td><input type="text" name="status" /></td>
-                        </tr>
-                    </table>
-                <input type="submit" value="Сохранить"  name="submit2">
-                </p>
-            </form>                     
-        </td>            
-<!-- ************************************************************************ -->
-        <td>
-            <form method="POST">
-                {% csrf_token %}
-                <p>
-                    <table border="1">
-                        <h2>Таблца Cудья</h2>
-                            <tr>
-                            <td><label>Фамилия судьи</label></td>
-                            <td><input type="text" name="judgesurname" /></td>
-                        </tr>                            <tr>
-                            <td><label>Имя судьи</label></td>
-                            <td><input type="text" name="judgename" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Отчество судьи</label></td>
-                            <td><input type="text" name="judgepatronymic" /></td>
-                        </tr>
-                    </table>
-                <input type="submit" value="Сохранить"  name="submit3">
-                </p>
-            </form>                     
-        </td>
-<!-- ************************************************************************ -->
-        <td>
-            <form method="POST">
-                {% csrf_token %}
-                <p>
-                    <table border="1">
-                        <h2>Таблца Результат</h2>
-                        <tr>
-                            <td><label>Фамилия тренера</label></td>
-                            <td><input type="text" name="mastersurname" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Имя тренера</label></td>
-                            <td><input type="text" name="mastername" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Отчество тренера</label></td>
-                            <td><input type="text" name="masterpatronymic" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Результат</label></td>
-                            <td><input type="number" name="result" /></td>
-                        </tr>
-                        <tr>                                
-                            <td><label>Дисциплина</label></td>
-                            <td><input type="text" name="discipline" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>ID соревнования</label></td>
-                            <td><input type="number" name="competitionid" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>ID спортсмена</label></td>
-                            <td><input type="number" name="sportsmenid" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>ID судьи</label></td>
-                            <td><input type="number" name="judgeid" /></td>
-                        </tr>
-                    </table>
-                <input type="submit" value="Сохранить"  name="submit4">
-                </p>
-            </form>                     
-        </td>
-    </tr>
-</table>
-<!-- ************************************************************************ -->
+<div class="tab-content" id="nav-tabContent"> 
+            <div class="tab-pane fade show active" id="nav-sportsman" role="tabpanel" aria-labelledby="nav-sportsman-tab">
+              <div class="my-3 my-md-5">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">Добавить</h3>
+                          </div>
+                                  <div class="card-body">
+                                    <div class="text-wrap">
+                                    <p class="text-justify">Данная форма позволяет добавить нового спортсмена в Базу Данных.</p>
+                                        <div class="form-group">
+                                          <label class="form-label">Фамилия</label>
+                                          <input type="text" class="form-control" name="example-text-input" placeholder="Иванов">
+                                          <label class="form-label">Имя</label>
+                                          <input type="text" class="form-control" name="example-text-input" placeholder="Иван">
+                                          <label class="form-label">Отчество</label>
+                                          <input type="text" class="form-control" name="example-text-input" placeholder="Иванович">
+                                          <label class="form-label">Регион</label>
+                                          <input type="text" class="form-control" name="example-text-input">
+                                          <label class="form-label">Категория</label>
+                                          <input type="text" class="form-control" name="example-text-input">
+                                          <label class="form-label">День рождения</label>
+                                          <input type="date" class="form-control" name="birthday">
+                                        </div>
+                                        <div class="card-footer text-right">
+                                          <div class="d-flex">
+                                            <a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+                                            <button type="submit" class="btn btn-primary ml-auto">Показать</button>
+                                          </div>
+                                        </div>
+          
+          
+          
+          
+                                        <section id="tabs">
+	<div class="container">
+		<h6 class="section-title h1">Tabs</h6>
+		<div class="row">
+			<div class="col-xs-12 ">
+				<nav>
+					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+						<a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a>
+					</div>
+				</nav>
+				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+						Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+					</div>
+					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+						Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+					</div>
+					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+						Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+					</div>
+					<div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+						Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+</section>
+                                    </div>
+                                  </div>
+                                </div>
+                      </div>
+                      <div class="col-lg-8">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">Список спортсменов</h3>
+                          </div>
+                          <div class="card-body">
+                              <div class="text-wrap">
+                                <!-- ВСТАВИТЬ ТАБЛИЦУ СЮДА -->
+                                <div class="alert alert-warning">
+                                  <strong>Warning!</strong> Paste table here please
+                                </div>
+                                <!-- ВСТАВИТЬ ТАБЛИЦУ СЮДА -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
 
-    {% if sportsmens.count > 0 %}
-    <h2>Список спортсменов</h2>
-    <table border="1"> 
-        <tr>
-            <td>ID</td>
-            <td>Фамилия</td>
-            <td>Имя</td>
-            <td>Отчество</td>
-            <td>Регион</td>
-            <td>День рождения</td>
-            <td>Категория</td>
-            <td></td>
-        </tr>
-
-        {% for sportsmen in sportsmens %}
-        <tr>
-            <td>{{ sportsmen.id }}</td>
-            <td>{{ sportsmen.surname }}</td>
-            <td>{{ sportsmen.name }}</td>
-            <td>{{ sportsmen.patronymic }}</td>
-            <td>{{ sportsmen.region }}</td>
-            <td>{{ sportsmen.dateofbirth }}</td>
-            <td>{{ sportsmen.category }}</td>
-            <td>
-                <form method="POST">
-                    {% csrf_token %}
-                    <p>
-                    <input type="hidden" name="delete_sp" value={{ sportsmen.id }}>
-                    <input type="submit" value="Удалить" name="delete_sportsmen">
-                    </p>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-
-    {% if competitions.count > 0 %}
-    <h2>Список соревнований</h2>
-    <table border="1"> 
-        <tr>
-            <td>ID</td>
-            <td>Дата</td>
-            <td>Место</td>
-            <td>Статус</td>
-            <td></td>
-        </tr>
-
-        {% for competition in competitions %}
-        <tr>
-            <td>{{ competition.id }}</td>
-            <td>{{ competition.date }}</td>
-            <td>{{ competition.place }}</td>
-            <td>{{ competition.status }}</td>
-            <td>
-                <form method="POST">
-                    {% csrf_token %}
-                    <p>
-                    <input type="hidden" name="delete_comp" value={{ competition.id }}>
-                    <input type="submit" value="Удалить" name="delete_competition">
-                    </p>
-                </form>
-            </td>            
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-
-    {% if judges.count > 0 %}
-    <h2>Список судей</h2>
-    <table border="1"> 
-        <tr>
-            <td>ID</td>
-            <td>Фамилия</td>
-            <td>Имя</td>
-            <td>Отчество</td>
-            <td></td>
-        </tr>
-
-        {% for judge in judges %}
-        <tr>
-            <td>{{ judge.id }}</td>
-            <td>{{ judge.judgesurname }}</td>
-            <td>{{ judge.judgename }}</td>
-            <td>{{ judge.judgepatronymic }}</td>
-            <td>
-                <form method="POST">
-                    {% csrf_token %}
-                    <p>
-                    <input type="hidden" name="delete_jud" value={{ judge.id }}>
-                    <input type="submit" value="Удалить" name="delete_judge">
-                    </p>
-                </form>
-            </td>            
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-
-    {% if results.count > 0 %}
-    <h2>Результат</h2>
-    <table border="1"> 
-        <tr>
-            <td>ID</td>
-            <td>ID спортсмена</td>
-            <td>ID соревнования</td>
-            <td>ID судьи</td>
-            <td>Результат</td>
-            <td>Фамилия</td>
-            <td>Имя</td>
-            <td>Отчество</td>
-            <td>Дисциплина</td>
-            <td></td>
-        </tr>
-
-        {% for result in results %}
-        <tr>
-            <td>{{ result.id }}</td>
-            <td>{{ result.sportsmenid.id }}</td>
-            <td>{{ result.competitionid.id }}</td>
-            <td>{{ result.judgeid.id }}</td>
-            <td>{{ result.result }}</td>
-            <td>{{ result.mastername }}</td>
-            <td>{{ result.mastersurname }}</td>
-            <td>{{ result.masterpatronymic }}</td>
-            <td>{{ result.discipline }}</td>
-            <td>
-                <form method="POST">
-                    {% csrf_token %}
-                    <p>
-                    <input type="hidden" name="delete_res" value={{ result.id }}>
-                    <input type="submit" value="Удалить" name="delete_result">
-                    </p>
-                </form>
-            </td>            
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
+              </div>
 
 {% endblock content %}

@@ -1,0 +1,315 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock title %}
+{% block header %}<!--Главнаяs-->{% endblock header %}
+
+
+{% block content %}
+
+    <div class="page">
+      <div class="flex-fill">
+        <div class="header py-4">
+          <div class="container">
+            <div class="d-flex">
+              <a class="header-brand" href="./index.html">
+                <img src="./demo/brand/giri.png" class="header-brand-img" alt="giri logo">
+              </a>
+              <div class="d-flex order-lg-2 ml-auto">
+                <!-- верхняя панель, правый контент -->
+                <div class="nav-item d-none d-md-flex">
+                  <!-- Кнопку логина сюда -->
+                  
+                </div>
+                <div class="dropdown">
+                  <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+                    <span class="avatar" style="background-image: url(./demo/faces/userpic.jpg)"></span>
+                    <span class="ml-2 d-none d-lg-block">
+                      <span class="text-default">Администратор</span>
+                      <!--<small class="text-muted d-block mt-1">Administrator</small>-->
+                    </span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="#">
+                      <i class="dropdown-icon fe fe-log-out"></i> Выйти
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+                <span class="header-toggler-icon"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <section id="tabs" class="project-tab">
+          <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+              <div class="container">
+                  <div class="row align-items-center">
+                    <div class="col-lg order-lg-first">
+                        <nav>
+                            <div class="nav nav-tabs nav-fill border-0 flex-column flex-lg-row" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-sportsman-tab" data-toggle="tab" href="#nav-sportsman" role="tab" aria-controls="nav-sportsman" aria-selected="true">Спортсмены</a>
+                                <a class="nav-item nav-link" id="nav-competition-tab" data-toggle="tab" href="#nav-competition" role="tab" aria-controls="nav-competition" aria-selected="false">Соревнования</a>
+                                <a class="nav-item nav-link" id="nav-results-tab" data-toggle="tab" href="#nav-results" role="tab" aria-controls="nav-results" aria-selected="false">Результаты</a>
+                                <a class="nav-item nav-link" id="nav-judges-tab" data-toggle="tab" href="#nav-judges" role="tab" aria-controls="nav-judges" aria-selected="false">Судьи</a>
+                            </div>
+                        </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+<!-- СПОРТСМЕНЫ -->
+            <div class="tab-content" id="nav-tabContent"> 
+            <div class="tab-pane fade show active" id="nav-sportsman" role="tabpanel" aria-labelledby="nav-sportsman-tab">
+              <div class="my-3 my-md-5">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">Добавить</h3>
+                          </div>
+                                  <div class="card-body">
+                                    <div class="text-wrap">
+                                    <p class="text-justify">Данная форма позволяет добавить нового спортсмена в Базу Данных.</p>
+                                        <div class="form-group">
+                                          <label class="form-label">Фамилия</label>
+                                          <input type="text" class="form-control" name="example-text-input" placeholder="Иванов">
+                                          <label class="form-label">Имя</label>
+                                          <input type="text" class="form-control" name="example-text-input" placeholder="Иван">
+                                          <label class="form-label">Отчество</label>
+                                          <input type="text" class="form-control" name="example-text-input" placeholder="Иванович">
+                                          <label class="form-label">Регион</label>
+                                          <input type="text" class="form-control" name="example-text-input">
+                                          <label class="form-label">Категория</label>
+                                          <input type="text" class="form-control" name="example-text-input">
+                                          <label class="form-label">День рождения</label>
+                                          <input type="date" class="form-control" name="birthday">
+                                        </div>
+                                        <div class="card-footer text-right">
+                                          <div class="d-flex">
+                                            <a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+                                            <button type="submit" class="btn btn-primary ml-auto">Показать</button>
+                                          </div>
+                                        </div>
+          
+                                        <!-- Таблицы ВСТАВИТЬ СЮДА 
+                                      </div> -->
+                                      <!--<div class="alert alert-warning">
+                                        <strong>Warning!</strong> all changes made in <code>_site/</code> folder would be overwriten on application build.
+                                      </div>-->
+                                    </div>
+                                  </div>
+                                </div>
+                      </div>
+                      <div class="col-lg-8">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">Список спортсменов</h3>
+                          </div>
+                          <div class="card-body">
+                              <div class="text-wrap">
+                                <!-- ВСТАВИТЬ ТАБЛИЦУ СЮДА -->
+                                <div class="alert alert-warning">
+                                  <strong>Warning!</strong> Paste table here please
+                                </div>
+                                <!-- ВСТАВИТЬ ТАБЛИЦУ СЮДА -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+<!-- СОРЕВНОВАНИЯ -->
+              <div class="tab-pane fade" id="nav-competition" role="tabpanel" aria-labelledby="nav-competition-tab">
+                  <div class="my-3 my-md-5">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="card">
+                              <div class="card-header">
+                                <h3 class="card-title">Добавить соревнование</h3>
+                              </div>
+                                      <div class="card-body">
+                                        <div class="text-wrap">
+                                        <p class="text-justify">Данная форма позволяет добавить новое соревнование в Базу Данных.</p>
+                                            <div class="form-group">
+                                              <label class="form-label">Место</label>
+                                              <input type="text" class="form-control" name="example-text-input" placeholder="Томск">
+                                              <label class="form-label">Статус соревнований</label>
+                                              <input type="text" class="form-control" name="example-text-input" placeholder="Региональные">
+                                              <label class="form-label">Дата проведения</label>
+                                              <input type="date" class="form-control" name="birthday">
+                                            </div>
+                                            <div class="card-footer text-right">
+                                              <div class="d-flex">
+                                                <a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+                                                <button type="submit" class="btn btn-primary ml-auto">Показать</button>
+                                              </div>
+                                            </div>
+              
+                                            <!-- Таблицы ВСТАВИТЬ СЮДА 
+                                          </div> -->
+                                          <!--<div class="alert alert-warning">
+                                            <strong>Warning!</strong> all changes made in <code>_site/</code> folder would be overwriten on application build.
+                                          </div>-->
+                                        </div>
+                                      </div>
+                                    </div>
+                          </div>
+                          <div class="col-lg-8">
+                            <div class="card">
+                              <div class="card-header">
+                                <h3 class="card-title">Список соревнований</h3>
+                              </div>
+                              <div class="card-body">
+                                  <div class="text-wrap">
+                                    <!-- ВСТАВИТЬ ТАБЛИЦУ СЮДА -->
+                                    <div class="alert alert-warning">
+                                      <strong>Warning!</strong> Paste table here please
+                                    </div>
+                                    <!-- ВСТАВИТЬ ТАБЛИЦУ СЮДА -->
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+    
+                  </div>
+<!-- РЕЗУЛЬТАТ -->
+                  <div class="tab-pane fade" id="nav-results" role="tabpanel" aria-labelledby="nav-results-tab">
+                      <div class="my-3 my-md-5">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-lg-4">
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h3 class="card-title">Добавить результат</h3>
+                                  </div>
+                                          <div class="card-body">
+                                            <div class="text-wrap">
+                                            <p class="text-justify">Данная форма позволяет добавить новый результат в Базу Данных.</p>
+                                                <div class="form-group">
+                                                  <label class="form-label">Фамилия тренера</label>
+                                                  <input type="text" class="form-control" name="example-text-input" placeholder="">
+                                                  <label class="form-label">Имя тренера</label>
+                                                  <input type="text" class="form-control" name="example-text-input" placeholder="">
+                                                  <label class="form-label">Отчество тренера</label>
+                                                  <input type="text" class="form-control" name="example-text-input" placeholder="">
+                                                  <label class="form-label">Результат</label>
+                                                  <input type="number" class="form-control" name="example-text-input" placeholder="">
+                                                  <label class="form-label">Дисциплина</label>
+                                                  <input type="text" class="form-control" name="example-text-input" placeholder="">
+                                                  <label class="form-label">ID соревнования</label>
+                                                  <input type="number" class="form-control" name="example-text-input" placeholder="">
+                                                  <label class="form-label">ID спортсмена</label>
+                                                  <input type="number" class="form-control" name="example-text-input" placeholder="">
+                                                  <label class="form-label">ID судьи</label>
+                                                  <input type="number" class="form-control" name="example-text-input" placeholder="">
+                                                </div>
+                                                <div class="card-footer text-right">
+                                                  <div class="d-flex">
+                                                    <a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+                                                    <button type="submit" class="btn btn-primary ml-auto">Показать</button>
+                                                  </div>
+                                                </div>
+                  
+                                                <!-- Таблицы ВСТАВИТЬ СЮДА 
+                                              </div> -->
+                                              <!--<div class="alert alert-warning">
+                                                <strong>Warning!</strong> all changes made in <code>_site/</code> folder would be overwriten on application build.
+                                              </div>-->
+                                            </div>
+                                          </div>
+                                        </div>
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h3 class="card-title">Список результатов</h3>
+                                  </div>
+                                  <div class="card-body">
+                                      <div class="text-wrap">
+                                        <!-- ВСТАВИТЬ ТАБЛИЦУ СЮДА -->
+                                        <div class="alert alert-warning">
+                                          <strong>Warning!</strong> Paste table here please
+                                        </div>
+                                        <!-- ВСТАВИТЬ ТАБЛИЦУ СЮДА -->
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+        
+                      </div>
+<!-- СУДЬИ -->
+                      <div class="tab-pane fade" id="nav-judges" role="tabpanel" aria-labelledby="nav-judges-tab">
+                          <div class="my-3 my-md-5">
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-lg-4">
+                                    <div class="card">
+                                      <div class="card-header">
+                                        <h3 class="card-title">Добавить судью</h3>
+                                      </div>
+                                              <div class="card-body">
+                                                <div class="text-wrap">
+                                                <p class="text-justify">Данная форма позволяет добавить нового судью в Базу Данных.</p>
+                                                    <div class="form-group">
+                                                      <label class="form-label">Фамилия</label>
+                                                      <input type="text" class="form-control" name="example-text-input" placeholder="Томск">
+                                                      <label class="form-label">Имя</label>
+                                                      <input type="text" class="form-control" name="example-text-input" placeholder="Региональные">
+                                                      <label class="form-label">Отчество</label>
+                                                      <input type="date" class="form-control" name="birthday">
+                                                    </div>
+                                                    <div class="card-footer text-right">
+                                                      <div class="d-flex">
+                                                        <a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+                                                        <button type="submit" class="btn btn-primary ml-auto">Показать</button>
+                                                      </div>
+                                                    </div>
+                      
+                                                    <!-- Таблицы ВСТАВИТЬ СЮДА 
+                                                  </div> -->
+                                                  <!--<div class="alert alert-warning">
+                                                    <strong>Warning!</strong> all changes made in <code>_site/</code> folder would be overwriten on application build.
+                                                  </div>-->
+                                                </div>
+                                              </div>
+                                            </div>
+                                  </div>
+                                  <div class="col-lg-8">
+                                    <div class="card">
+                                      <div class="card-header">
+                                        <h3 class="card-title">Список судей</h3>
+                                      </div>
+                                      <div class="card-body">
+                                          <div class="text-wrap">
+                                            <!-- ВСТАВИТЬ ТАБЛИЦУ СЮДА -->
+                                            <div class="alert alert-warning">
+                                              <strong>Warning!</strong> Paste table here please
+                                            </div>
+                                            <!-- ВСТАВИТЬ ТАБЛИЦУ СЮДА -->
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+            
+                          </div>
+
+
+            </div>
+
+      </div>
+    </section>  
+

@@ -25,5 +25,6 @@ urlpatterns = [
     path('operator/', views.operator),
     path('judge/', views.judge),    
     path('admin/', views.admin),
+    path('login/', views.login),
     path('', views.index),
 ]

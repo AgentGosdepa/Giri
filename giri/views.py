@@ -181,3 +181,7 @@ def dashboard_set(request):
 	else:
 		return HttpResponse("GET REQUEST REQUIRED!")
 
+# Login form page
+def login(request):
+    return render(request, "login.html")
+

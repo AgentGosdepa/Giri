@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'giri.apps.GiriConfig',
+    'jquery',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,4 @@ STATICFILES_DIRS = [
 	#os.path.join(os.path.dirname(os.path.abspath(__file__)), "giri/templates/static"),
     os.path.join(BASE_DIR, "giri/templates/"),
 ]
+
