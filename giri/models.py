@@ -29,3 +29,9 @@ class Result(models.Model):
 	masterpatronymic = models.CharField(max_length = 30)
 	discipline = models.CharField(max_length = 30)
 	platform = models.IntegerField()
+
+class Users(models.Model):
+	username = models.CharField(max_length = 30)
+	password = models.CharField(max_length = 30)
+	permission = models.IntegerField()
+	judgeid = models.IntegerField()

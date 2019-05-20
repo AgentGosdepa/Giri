@@ -50,7 +50,11 @@
 					<div class="d-flex order-lg-2 ml-auto">
 						<div class="nav-item d-none d-md-flex">
 							<!-- Кнопка Логина -->
-							<a href="./login/" class="btn btn-sm btn-outline-primary">Войти</a>
+							{% if not isauth %}
+							<a href="/login/" class="btn btn-sm btn-outline-primary">Войти</a>
+							{% else %}
+							<a href="/logout/" class="btn btn-sm btn-outline-primary">Выйти</a>
+							{% endif %}
 							<!-- Кнопка Логина -->
 						</div>
 					</div>

@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseNotFound
-from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+#from django.contrib.auth.models import User
 from .models import *
 from .form import *
 
@@ -44,10 +45,16 @@ def index(request):
 			password = request.POST.get("password")
 
 	else:
-		return render(request, "index.html", {"sportsmens": Sportsmen.objects.all(), "results": Result.objects.all()})
+		return render(request, "index.html", {"sportsmens": Sportsmen.objects.all(), "results": Result.objects.all(), "isauth": request.session.get('isauth', False), "userid": request.session.get('userid', -1)})
 
 #*********************************************************************************
 def admin(request):
+	isauth = request.session.get('isauth', False)
+	userid = request.session.get('userid', -1)
+
+	if (not isauth):
+		return HttpResponseRedirect("/")
+
 	if request.method == "POST":
 		if ('submit1' in request.POST):
 			name = 					request.POST.get("name")
@@ -101,6 +108,17 @@ def admin(request):
 			masterpatronymic = masterpatronymic, 
 			discipline = discipline,
 			platform = 0)	
+#********************************************		
+		elif ('submit5' in request.POST):
+			username = 					request.POST.get("username")
+			password = 					request.POST.get("password")
+			permission = 				request.POST.get("permission")
+			judgeid = 0;				
+
+			user = Users.objects.create(username = username,
+			password = password,
+			permission = permission,
+			judgeid = judgeid)	
 #********************************************
 		elif ('delete_sportsmen' in request.POST):
 			Sportsmen.objects.get(id = request.POST.get("delete_sp")).delete()
@@ -114,13 +132,14 @@ def admin(request):
 		elif ('delete_result' in request.POST):
 			Result.objects.get(id = request.POST.get("delete_res")).delete()
 #********************************************	
-		return render(request, "admin.html", {"sportsmens": Sportsmen.objects.all(),
-			"competitions": Competition.objects.all(), "judges": Judge.objects.all(),
-			"results": Result.objects.all()})
-	else:
-		return render(request, "admin.html", {"sportsmens": Sportsmen.objects.all(),
-			"competitions": Competition.objects.all(), "judges": Judge.objects.all(),
-			"results": Result.objects.all()})
+		elif ('delete_user' in request.POST):
+			Users.objects.get(id = request.POST.get("delete_use")).delete()
+#********************************************	
+	return render(request, "admin.html", {"sportsmens": Sportsmen.objects.all(),
+		"competitions": Competition.objects.all(), "judges": Judge.objects.all(),
+		"results": Result.objects.all(), "users": Users.objects.all(), 
+		"isauth": request.session.get('isauth', True), 
+		"userid": request.session.get('userid', -1)})
     
 #********************************************************************************* 
 def operator(request):
@@ -129,21 +148,6 @@ def operator(request):
 #*********************************************************************************
 def judge(request):
     return render(request, "judge.html")
-
-def contactView(request):
-	if request.method == 'POST':
-		form = ContactForm(request.POST)
-		#Если форма заполнена корректно, сохраняем все введённые пользователем значения
-		if form.is_valid():
-			subject = form.cleaned_data['subject']
-			message = form.cleaned_data['message']
-            
-			return HttpResponseRedirect("/")
-	else:
-		#Заполняем форму
-		form = ContactForm()
-	#Отправляем форму на страницу
-		return render(request, 'contact.html', {'form': form})
 
 def dashboard_get(request):
 	if request.method == "GET":
@@ -183,8 +187,30 @@ def dashboard_set(request):
 
 # Login form page
 def login(request):
-    return render(request, "login.html")
+	return render(request, "login.html")
+
+def log(request):
+	try:
+		m = Users.objects.get(username=request.POST['username'])
+		if m.password == request.POST['password']:
+			request.session['isauth'] = True
+			request.session['userid'] = m.id
+			return HttpResponseRedirect("/")
+		else:
+			return HttpResponse("Неверный пароль!")
+	except ObjectDoesNotExist:
+		return HttpResponse("Неверный логин!")
+
+def logout(request):
+	try:
+		if 'isauth' in request.session:
+			del request.session['isauth']
+		if 'userid' in request.session:
+			del request.session['userid']
+	except KeyError:
+		pass
+	return HttpResponseRedirect("/")
 
 # Profile form page
 def profile(request):
-    return render(request, "profile.html", {"results": Result.objects.all()})
+	return render(request, "profile.html", {"results": Result.objects.all()})

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'giri.apps.GiriConfig',
-    'jquery',
+    #'jquery',
 ]
 
 MIDDLEWARE = [
