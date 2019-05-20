@@ -3,5 +3,394 @@
 {% block header %}<!--Главнаяs-->{% endblock header %}
 {% load staticfiles %}
 
+
+
 {% block content %}
+
+<section id="tabs" class="project-tab">
+	<div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg order-lg-first">
+					<nav>
+						<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+							<a class="nav-item nav-link active" id="nav-sportsman-tab" data-toggle="tab" href="#nav-sportsman" role="tab" aria-controls="nav-sportsman" aria-selected="true">Спортсмены</a>
+							<a class="nav-item nav-link" id="nav-competition-tab" data-toggle="tab" href="#nav-competition" role="tab" aria-controls="nav-competition" aria-selected="false">Соревнования</a>
+							<a class="nav-item nav-link" id="nav-results-tab" data-toggle="tab" href="#nav-results" role="tab" aria-controls="nav-results" aria-selected="false">Результаты</a>
+							<a class="nav-item nav-link" id="nav-judges-tab" data-toggle="tab" href="#nav-judges" role="tab" aria-controls="nav-judges" aria-selected="false">Судьи</a>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- СПОРТСМЕНЫ -->
+	<div class="tab-content" id="nav-tabContent">
+		<div class="tab-pane fade show active" id="nav-sportsman" role="tabpanel" aria-labelledby="nav-sportsman-tab">
+			<div class="my-3 my-md-5">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Добавить спортсмена</h3>
+								</div>
+								<div class="card-body">
+									<div class="text-wrap">
+										<p class="text-justify">Данная форма позволяет добавить нового спортсмена в Базу Данных.</p>
+										<form method="POST">
+										{% csrf_token %}
+											<div class="form-group">
+												<label class="form-label">Фамилия</label>
+												<input type="text" class="form-control" name="surname" placeholder="Иванов">
+												<label class="form-label">Имя</label>
+												<input type="text" class="form-control" name="name" placeholder="Иван">
+												<label class="form-label">Отчество</label>
+												<input type="text" class="form-control" name="patronymic" placeholder="Иванович">
+												<label class="form-label">Регион</label>
+												<input type="text" class="form-control" name="region">
+												<label class="form-label">Категория</label>
+												<input type="text" class="form-control" name="category">
+												<label class="form-label">День рождения</label>
+												<input type="date" class="form-control" name="birthday">
+											</div>
+											<div class="card-footer text-right">
+												<div class="d-flex">
+													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+													<button type="submit" class="btn btn-primary ml-auto" name="submit1">Сохранить</button>
+												</div>
+											</div>
+										</form> 
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-8">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Список спортсменов</h3>
+								</div>
+								<div class="card-body">
+									<div class="text-wrap">
+										<!-- ТАБЛИЦА -->
+										{% if sportsmens.count > 0 %}
+										<table class="table table-bordered"> 
+											<tr>
+												<td>ID</td>
+												<td>Имя</td>
+												<td>Регион</td>
+												<td>День рождения</td>
+												<td>Категория</td>
+												<td></td>
+											</tr>
+											{% for sportsmen in sportsmens %}
+											<tr>
+												<td>{{ sportsmen.id }}</td>
+												<td>{{ sportsmen.surname }}
+												{{ sportsmen.name }}
+												{{ sportsmen.patronymic }}</td>
+												<td>{{ sportsmen.region }}</td>
+												<td>{{ sportsmen.dateofbirth }}</td>
+												<td>{{ sportsmen.category }}</td>
+												<td>
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_sp" value={{ sportsmen.id }}>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen">Удалить</button>
+														</p>
+													</form>
+												</td>
+											</tr>
+											{% endfor %}
+										</table>
+										{% endif %}
+										<!-- ТАБЛИЦА -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<!-- СОРЕВНОВАНИЯ -->
+		<div class="tab-pane fade" id="nav-competition" role="tabpanel" aria-labelledby="nav-competition-tab">
+			<div class="my-3 my-md-5">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Добавить соревнование</h3>
+								</div>
+								<div class="card-body">
+									<div class="text-wrap">
+										<p class="text-justify">Данная форма позволяет добавить новое соревнование в Базу Данных.</p>
+										<form method="POST">
+										{% csrf_token %}
+											<div class="form-group">
+												<label class="form-label">Дата проведения</label>
+												<input type="date" class="form-control" name="date">
+												<label class="form-label">Место</label>
+												<input type="text" class="form-control" name="place" placeholder="Томск">
+												<label class="form-label">Статус соревнований</label>
+												<input type="text" class="form-control" name="status" placeholder="Межвузовские">
+											</div>
+											<div class="card-footer text-right">
+												<div class="d-flex">
+													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+													<button type="submit" class="btn btn-primary ml-auto" name="submit2">Сохранить</button>
+												</div>
+											</div>
+										</form> 
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-8">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Список спортсменов</h3>
+								</div>
+								<div class="card-body">
+									<div class="text-wrap">
+										<!-- ТАБЛИЦА -->
+										{% if competitions.count > 0 %}
+										<table class="table table-bordered"> 
+											<tr>
+												<td>ID</td>
+												<td>Дата</td>
+												<td>Место</td>
+												<td>Статус</td>
+												<td></td>
+											</tr>
+											{% for competition in competitions %}
+											<tr>
+												<td>{{ competition.id }}</td>
+												<td>{{ competition.date }}</td>
+												<td>{{ competition.place }}</td>
+												<td>{{ competition.status }}</td>
+												<td>
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_comp" value={{ competition.id }}>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition">Удалить</button>
+														</p>
+													</form>
+												</td>            
+											</tr>
+											{% endfor %}
+										</table>
+										{% endif %}
+										<!-- ТАБЛИЦА -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<!-- РЕЗУЛЬТАТ -->
+		<div class="tab-pane fade" id="nav-results" role="tabpanel" aria-labelledby="nav-results-tab">
+			<div class="my-3 my-md-5">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Добавить результат</h3>
+								</div>
+								<div class="card-body">
+									<div class="text-wrap">
+										<p class="text-justify">Данная форма позволяет добавить новый результат в Базу Данных.</p>
+										<form method="POST">
+										{% csrf_token %}
+											<div class="form-group">
+												<label class="form-label">Фамилия тренера</label>
+												<input type="text" class="form-control" name="mastersurname">
+												<label class="form-label">Имя тренера</label>
+												<input type="text" class="form-control" name="mastername">
+												<label class="form-label">Отчество тренера</label>
+												<input type="text" class="form-control" name="masterpatronymic">
+												<label class="form-label">Дисциплина</label>
+												<input type="text" class="form-control" name="discipline">
+												<label class="form-label">ID соревнования</label>
+												<select size="1" name="competitionid"> {% if competitions.count > 0 %}
+													{% for competition in competitions %}
+											   			<option value="{{ competition.id }}">{{ competition.id }} ({{ competition.place }})</option>
+											    	{% endfor %}
+											    {% endif %}
+											   	</select>
+												<!--<input type="number" class="form-control" name="competitionid">-->
+												<label class="form-label">ID спортсмена</label>
+												<select size="1" name="sportsmenid"> {% if sportsmens.count > 0 %}
+													{% for sportsmen in sportsmens %}
+											   			<option value="{{ sportsmen.id }}">{{ sportsmen.id }} ({{ sportsmen.surname }} {{ sportsmen.name }} {{ sportsmen.patronymic }})</option>
+											    	{% endfor %}
+											    {% endif %}
+											   	</select>
+												<!--<input type="number" class="form-control" name="sportsmenid">-->
+												<label class="form-label">ID судьи</label>
+												<select size="1" name="judgeid"> {% if judges.count > 0 %}
+													{% for judge in judges %}
+											   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
+											    	{% endfor %}
+											    {% endif %}
+											   	</select>												
+												<!--<input type="number" class="form-control" name="judgeid">-->
+												<label class="form-label">Платформа</label>
+												<input type="number" class="form-control" name="platform">
+											</div>
+											<div class="card-footer text-right">
+												<div class="d-flex">
+													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+													<button type="submit" class="btn btn-primary ml-auto" name="submit4">Сохранить</button>
+												</div>
+											</div>
+										</form> 
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-8">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Список результатов</h3>
+								</div>
+								<div class="card-body">
+									<div class="text-wrap">
+										<!-- ТАБЛИЦА -->
+										{% if results.count > 0 %}
+										<table class="table table-bordered"> 
+											<tr>
+												<td>ID</td>
+												<td>ID Спортсмена</td>
+												<td>ID Соревнов.</td>
+												<td>ID Судьи</td>
+												<td>Имя</td>
+												<td>Дисциплина</td>
+												<td>Платфора</td>
+												<td></td>
+											</tr>
+
+											{% for result in results %}
+											<tr>
+												<td>{{ result.id }}</td>
+												<td>{{ result.sportsmenid.id }} ({{ result.sportsmenid.surname }} {{ result.sportsmenid.name }} {{ result.sportsmenid.patronymic }})</td>
+												<td>{{ result.competitionid.id }} ({{ result.competitionid.place }})</td>
+												<td>{{ result.judgeid.id }} ({{ result.judgeid.judgesurname }} {{ result.judgeid.judgename }} {{ result.judgeid.judgepatronymic }})</td>
+												<td>{{ result.mastername }}
+												{{ result.mastersurname }}
+												{{ result.masterpatronymic }}</td>
+												<td>{{ result.discipline }}</td>
+												<td>{{ result.platform }}</td>
+												<td>
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_res" value={{ result.id }}>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_result">Удалить</button>
+														</p>
+													</form>
+												</td>            
+											</tr>
+											{% endfor %}
+										</table>
+										{% endif %}
+										<!-- ТАБЛИЦА -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<!-- СУДЬИ -->
+		<div class="tab-pane fade" id="nav-judges" role="tabpanel" aria-labelledby="nav-judges-tab">
+			<div class="my-3 my-md-5">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Добавить судью</h3>
+								</div>
+								<div class="card-body">
+									<div class="text-wrap">
+										<p class="text-justify">Данная форма позволяет добавить судью в Базу Данных.</p>
+										<form method="POST">
+										{% csrf_token %}
+											<div class="form-group">
+												<label class="form-label">Фамилия</label>
+												<input type="text" class="form-control" name="judgesurname">
+												<label class="form-label">Имя</label>
+												<input type="text" class="form-control" name="judgename">
+												<label class="form-label">Отчество</label>
+												<input type="text" class="form-control" name="judgepatronymic">
+											</div>
+											<div class="card-footer text-right">
+												<div class="d-flex">
+													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+													<button type="submit" class="btn btn-primary ml-auto" name="submit3">Сохранить</button>
+												</div>
+											</div>
+										</form> 
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-8">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Список судей</h3>
+								</div>
+								<div class="card-body">
+									<div class="text-wrap">
+										<!-- ТАБЛИЦА -->
+										{% if judges.count > 0 %}
+										<table class="table table-bordered"> 
+											<tr>
+												<td>ID</td>
+												<td>Имя</td>
+
+											</tr>
+
+											{% for judge in judges %}
+											<tr>
+												<td>{{ judge.id }}</td>
+												<td>{{ judge.judgesurname }}
+												{{ judge.judgename }}
+												{{ judge.judgepatronymic }}</td>
+												<td>
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_jud" value={{ judge.id }}>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge">Удалить</button>
+														</p>
+													</form>
+												</td>            
+											</tr>
+											{% endfor %}
+										</table>
+										{% endif %}
+										<!-- ТАБЛИЦА -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+</section>
 {% endblock content %}

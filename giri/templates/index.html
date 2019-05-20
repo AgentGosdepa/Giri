@@ -50,10 +50,13 @@
 				<div class="card-body">
 					<div class="text-wrap">
 						<!-- DEBUG -->
-						<p class="text-justify">Debug links:
-						<a href="/judge/">Судья</a> | 
-						<a href="/operator/">Оператор</a> | 
-						<a href="/admin/">Администратор</a></p>
+							{% if usertype == "J" %}
+						<a href="/judge/">Судья</a>
+							{% elif usertype == "O" %} 
+						<a href="/operator/">Оператор</a>
+							{% elif usertype == "A" %}
+						<a href="/admin/">Администратор</a>
+							{% endif %}
 						<!-- DEBUG -->
 							<form>
 							{% if sportsmens.count > 0 %}

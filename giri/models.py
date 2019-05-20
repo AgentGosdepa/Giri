@@ -31,7 +31,8 @@ class Result(models.Model):
 	platform = models.IntegerField()
 
 class Users(models.Model):
+	usertype = (('U', 'User'), ('J', 'Judge'), ('O', 'Operator'), ('A', 'Administrator'))
 	username = models.CharField(max_length = 30)
 	password = models.CharField(max_length = 30)
-	permission = models.IntegerField()
+	permission = models.CharField(max_length = 1, choices = usertype, default = 'U')
 	judgeid = models.IntegerField()

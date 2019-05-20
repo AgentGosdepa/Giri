@@ -45,14 +45,20 @@ def index(request):
 			password = request.POST.get("password")
 
 	else:
-		return render(request, "index.html", {"sportsmens": Sportsmen.objects.all(), "results": Result.objects.all(), "isauth": request.session.get('isauth', False), "userid": request.session.get('userid', -1)})
+		return render(request, "index.html", {"sportsmens": Sportsmen.objects.all(), "results": Result.objects.all(), "isauth": request.session.get('isauth', False), "userid": request.session.get('userid', -1),"usertype": request.session.get('usertype', "U")})
 
 #*********************************************************************************
 def admin(request):
 	isauth = request.session.get('isauth', False)
 	userid = request.session.get('userid', -1)
 
-	if (not isauth):
+	try:
+		if not Users.objects.get(id = userid).permission == 'A':
+			userid = -1
+	except ObjectDoesNotExist:
+		userid = -1
+
+	if (not isauth or userid == -1):
 		return HttpResponseRedirect("/")
 
 	if request.method == "POST":
@@ -143,11 +149,135 @@ def admin(request):
     
 #********************************************************************************* 
 def operator(request):
-	return render(request, "operator.html")
+	isauth = request.session.get('isauth', False)
+	userid = request.session.get('userid', -1)
+
+	try:
+		if not Users.objects.get(id = userid).permission == 'O':
+			userid = -1
+	except ObjectDoesNotExist:
+		userid = -1
+
+	if (not isauth or userid == -1):
+		return HttpResponseRedirect("/")
+
+	if request.method == "POST":
+		if ('submit1' in request.POST):
+			name = 					request.POST.get("name")
+			surname = 				request.POST.get("surname")
+			patronymic = 			request.POST.get("patronymic")
+			region = 				request.POST.get("region")
+			dateofbirth = 			request.POST.get("birthday")
+			category = 				request.POST.get("category")
+
+			sportsmen = Sportsmen.objects.create(name = name,
+			surname = surname,
+			patronymic = patronymic,
+			region = region,
+			dateofbirth = dateofbirth,
+			category = category)
+#********************************************	
+		elif ('submit2' in request.POST):
+			date =					request.POST.get("date")
+			place = 				request.POST.get("place")
+			status = 				request.POST.get("status")
+
+			competition = Competition.objects.create(date = date, 
+			place = place,
+			status = status)	
+#********************************************	
+		elif ('submit3' in request.POST):
+			judgename = 			request.POST.get("judgename")
+			judgesurname = 			request.POST.get("judgesurname")
+			judgepatronymic = 		request.POST.get("judgepatronymic")
+
+			judge = Judge.objects.create(judgename = judgename,
+			judgesurname = judgesurname,
+			judgepatronymic = judgepatronymic)
+#********************************************		
+		elif ('submit4' in request.POST):
+			sportsmenid = 			request.POST.get("sportsmenid")
+			competitionid = 		request.POST.get("competitionid")
+			judgeid = 				request.POST.get("judgeid")
+			result = 0				#request.POST.get("result")
+			mastername = 			request.POST.get("mastername")
+			mastersurname = 		request.POST.get("mastersurname")
+			masterpatronymic = 		request.POST.get("masterpatronymic")
+			discipline = 			request.POST.get("discipline")
+			platform = 				request.POST.get("platform")
+
+			result = Result.objects.create(sportsmenid = Sportsmen.objects.get(id = sportsmenid),
+			competitionid = Competition.objects.get(id = competitionid),
+			judgeid = Judge.objects.get(id = judgeid),
+			result = result, 
+			mastername = mastername,
+			mastersurname = mastersurname, 
+			masterpatronymic = masterpatronymic, 
+			discipline = discipline,
+			platform = platform)
+#********************************************
+		elif ('delete_sportsmen' in request.POST):
+			Sportsmen.objects.get(id = request.POST.get("delete_sp")).delete()
+#********************************************	
+		elif ('delete_competition' in request.POST):
+			Competition.objects.get(id = request.POST.get("delete_comp")).delete()
+#********************************************	
+		elif ('delete_judge' in request.POST):
+			Judge.objects.get(id = request.POST.get("delete_jud")).delete()
+#********************************************	
+		elif ('delete_result' in request.POST):
+			Result.objects.get(id = request.POST.get("delete_res")).delete()
+#********************************************	
+	return render(request, "operator.html", {"sportsmens": Sportsmen.objects.all(),
+		"competitions": Competition.objects.all(), "judges": Judge.objects.all(),
+		"results": Result.objects.all(), 
+		"isauth": request.session.get('isauth', True), 
+		"userid": request.session.get('userid', -1)})
 
 #*********************************************************************************
 def judge(request):
-    return render(request, "judge.html")
+	isauth = request.session.get('isauth', False)
+	userid = request.session.get('userid', -1)
+
+	try:
+		if not Users.objects.get(id = userid).permission == 'J':
+			userid = -1
+	except ObjectDoesNotExist:
+		userid = -1
+
+	if (not isauth or userid == -1):
+		return HttpResponseRedirect("/")
+
+	if request.method == "POST":	
+		if ('submit4' in request.POST):
+			sportsmenid = 			request.POST.get("sportsmenid")
+			competitionid = 		request.POST.get("competitionid")
+			judgeid = 				1
+			results = 				request.POST.get("result")
+			#mastername = 			request.POST.get("mastername")
+			#mastersurname = 		request.POST.get("mastersurname")
+			#masterpatronymic = 		request.POST.get("masterpatronymic")
+			#discipline = 			request.POST.get("discipline")
+			#platform = 				request.POST.get("platform")
+
+			try:
+				result = Result.objects.get(sportsmenid = Sportsmen.objects.get(id = sportsmenid),
+				competitionid = Competition.objects.get(id = competitionid),
+				judgeid = Judge.objects.get(id = judgeid))
+				result.result = results
+				result.save()
+			except ObjectDoesNotExist:
+				return HttpResponseRedirect("/judge/")
+
+#********************************************	
+		elif ('delete_result' in request.POST):
+			Result.objects.get(id = request.POST.get("delete_res")).delete()			
+
+	return render(request, "judge.html", {"sportsmens": Sportsmen.objects.all(),
+		"competitions": Competition.objects.all(), "judges": Judge.objects.all(),
+		"results": Result.objects.all(), 
+		"isauth": request.session.get('isauth', True), 
+		"userid": request.session.get('userid', -1)})
 
 def dashboard_get(request):
 	if request.method == "GET":
@@ -195,6 +325,7 @@ def log(request):
 		if m.password == request.POST['password']:
 			request.session['isauth'] = True
 			request.session['userid'] = m.id
+			request.session['usertype'] = m.permission
 			return HttpResponseRedirect("/")
 		else:
 			return HttpResponse("Неверный пароль!")
@@ -207,6 +338,8 @@ def logout(request):
 			del request.session['isauth']
 		if 'userid' in request.session:
 			del request.session['userid']
+		if 'usertype' in request.session:
+			del request.session['usertype']			
 	except KeyError:
 		pass
 	return HttpResponseRedirect("/")

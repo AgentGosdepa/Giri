@@ -4,4 +4,103 @@
 {% load staticfiles %}
 
 {% block content %}
+
+<section id="tabs" class="project-tab">
+
+<!-- РЕЗУЛЬТАТ -->
+
+			<div class="my-3 my-md-5">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Добавить результат</h3>
+								</div>
+								<div class="card-body">
+									<div class="text-wrap">
+										<p class="text-justify">Данная форма позволяет добавить новый результат в Базу Данных.</p>
+										<form method="POST">
+										{% csrf_token %}
+											<div class="form-group">
+												<label class="form-label">ID соревнования</label>
+												<select size="1" name="competitionid"> {% if competitions.count > 0 %}
+													{% for competition in competitions %}
+											   			<option value="{{ competition.id }}">{{ competition.id }} ({{ competition.place }})</option>
+											    	{% endfor %}
+											    {% endif %}
+											   	</select>
+												<!--<input type="number" class="form-control" name="competitionid">-->
+												<label class="form-label">ID спортсмена</label>
+												<select size="1" name="sportsmenid"> {% if sportsmens.count > 0 %}
+													{% for sportsmen in sportsmens %}
+											   			<option value="{{ sportsmen.id }}">{{ sportsmen.id }} ({{ sportsmen.surname }} {{ sportsmen.name }} {{ sportsmen.patronymic }})</option>
+											    	{% endfor %}
+											    {% endif %}
+											   	</select>
+												<!--<input type="number" class="form-control" name="sportsmenid">-->
+												<label class="form-label">Результат</label>
+												<input type="number" class="form-control" name="result">
+											</div>
+											<div class="card-footer text-right">
+												<div class="d-flex">
+													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+													<button type="submit" class="btn btn-primary ml-auto" name="submit4">Сохранить</button>
+												</div>
+											</div>
+										</form> 
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-8">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Список результатов</h3>
+								</div>
+								<div class="card-body">
+									<div class="text-wrap">
+										<!-- ТАБЛИЦА -->
+										{% if results.count > 0 %}
+										<table class="table table-bordered"> 
+											<tr>
+												<td>ID</td>
+												<td>ID Спортсмена</td>
+												<td>ID Соревнов.</td>
+												<td>ID Судьи</td>
+												<td>Результат</td>
+												<td></td>
+											</tr>
+
+											{% for result in results %}
+											<tr>
+												<td>{{ result.id }}</td>
+												<td>{{ result.sportsmenid.id }} ({{ result.sportsmenid.surname }} {{ result.sportsmenid.name }} {{ result.sportsmenid.patronymic }})</td>
+												<td>{{ result.competitionid.id }} ({{ result.competitionid.place }})</td>
+												<td>{{ result.judgeid.id }} ({{ result.judgeid.judgesurname }} {{ result.judgeid.judgename }} {{ result.judgeid.judgepatronymic }})</td>
+												<td>{{ result.result }}</td>
+												<td>
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_res" value={{ result.id }}>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_result">Удалить</button>
+														</p>
+													</form>
+												</td>            
+											</tr>
+											{% endfor %}
+										</table>
+										{% endif %}
+										<!-- ТАБЛИЦА -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+</section>
+
 {% endblock content %}
