@@ -358,16 +358,19 @@
 										<table class="table table-bordered"> 
 											<tr>
 												<td>ID</td>
+												<td>Фамилия</td>
 												<td>Имя</td>
-
+												<td>Отчество</td>
+												<td>Действие</td>
 											</tr>
 
 											{% for judge in judges %}
 											<tr>
-												<td>{{ judge.id }}</td>
-												<td>{{ judge.judgesurname }}
-												{{ judge.judgename }}
-												{{ judge.judgepatronymic }}</td>
+												<td><input type="text" class="form-control" name="id" value="{{ judge.id }}" disabled></td>
+												<td><input type="text" class="form-control" name="judgesurname" value="{{ judge.judgesurname }}"></td>
+												<td><input type="text" class="form-control" name="judgename" value="{{ judge.judgename }}"></td>
+												<td><input type="text" class="form-control" name="judgepatronymic" value="{{ judge.judgepatronymic }}">
+												
 												<td>
 													<form method="POST">
 														{% csrf_token %}
@@ -376,6 +379,13 @@
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge">Удалить</button>
 														</p>
 													</form>
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_jud" value={{ judge.id }}>
+														<button type="submit" class="btn btn-success ml-auto" name="save_judge">Сохранить</button>
+														</p>
+													</form>													
 												</td>            
 											</tr>
 											{% endfor %}
@@ -404,7 +414,7 @@
 								<div class="card-body">
 									<div class="text-wrap">
 										<p class="text-justify">Данная форма позволяет добавить пользователя в Базу Данных.</p>
-										<form method="POST">
+										<form method="POST" action="./#nav-users">
 										{% csrf_token %}
 											<div class="form-group">
 												<label class="form-label">Логин</label>
@@ -412,7 +422,21 @@
 												<label class="form-label">Пароль</label>
 												<input type="text" class="form-control" name="password">
 												<label class="form-label">Тип</label>
-												<input type="text" class="form-control" name="permission">
+
+												<select size="1" name="permission"> 
+													<option value="U">User</option>
+													<option value="J">Judge</option>
+													<option value="O">Operator</option>
+													<option value="A">Administrator</option>
+												</select>
+												<!--<input type="text" class="form-control" name="permission">-->
+												<label class="form-label">ID</label>
+												<select size="1" name="judgeid"> {% if judges.count > 0 %}
+													{% for judge in judges %}
+											   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
+											    	{% endfor %}
+											    {% endif %}
+											   	</select>		
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">

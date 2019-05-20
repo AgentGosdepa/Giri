@@ -71,8 +71,9 @@
 							</thead>
 							{% for sportsmen in sportsmens %}                     
 							<tbody>
-								<tr>
+								
 									{% for result in results %}
+									<tr>
 									{% if result.sportsmenid.id == sportsmen.id %}
 									<td>
 										<a href="/profile/">

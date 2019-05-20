@@ -119,7 +119,7 @@ def admin(request):
 			username = 					request.POST.get("username")
 			password = 					request.POST.get("password")
 			permission = 				request.POST.get("permission")
-			judgeid = 0;				
+			judgeid = 					request.POST.get("judgeid")				
 
 			user = Users.objects.create(username = username,
 			password = password,
@@ -184,7 +184,7 @@ def operator(request):
 
 			competition = Competition.objects.create(date = date, 
 			place = place,
-			status = status)	
+			status = status)
 #********************************************	
 		elif ('submit3' in request.POST):
 			judgename = 			request.POST.get("judgename")
@@ -252,7 +252,7 @@ def judge(request):
 		if ('submit4' in request.POST):
 			sportsmenid = 			request.POST.get("sportsmenid")
 			competitionid = 		request.POST.get("competitionid")
-			judgeid = 				1
+			judgeid = 				Users.objects.get(id = request.session.get('userid')).judgeid
 			results = 				request.POST.get("result")
 			#mastername = 			request.POST.get("mastername")
 			#mastersurname = 		request.POST.get("mastersurname")
@@ -273,9 +273,10 @@ def judge(request):
 		elif ('delete_result' in request.POST):
 			Result.objects.get(id = request.POST.get("delete_res")).delete()			
 
+	
 	return render(request, "judge.html", {"sportsmens": Sportsmen.objects.all(),
 		"competitions": Competition.objects.all(), "judges": Judge.objects.all(),
-		"results": Result.objects.all(), 
+		"results": Result.objects.filter(judgeid = Judge.objects.get(id = Users.objects.get(id = request.session.get('userid', -1)).judgeid)), 
 		"isauth": request.session.get('isauth', True), 
 		"userid": request.session.get('userid', -1)})
 
