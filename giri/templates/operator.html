@@ -57,7 +57,6 @@
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
-													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit1">Сохранить</button>
 												</div>
 											</div>
@@ -71,17 +70,17 @@
 								<div class="card-header">
 									<h3 class="card-title">Список спортсменов</h3>
 								</div>
-								<div class="card-body">
-									<div class="text-wrap">
+								<div class="table-responsive">
+
 										<!-- ТАБЛИЦА -->
 										{% if sportsmens.count > 0 %}
-										<table class="table table-bordered"> 
+										<table class="table table-hover table-outline table-vcenter text-nowrap card-table"> 
 											<tr>
-												<td>ID</td>
-												<td>Имя</td>
-												<td>Регион</td>
-												<td>День рождения</td>
-												<td>Категория</td>
+												<th>ID</th>
+												<th>Имя</th>
+												<th>Регион</th>
+												<th>День рождения</th>
+												<th>Категория</th>
 												<td></td>
 											</tr>
 											{% for sportsmen in sportsmens %}
@@ -98,7 +97,7 @@
 														{% csrf_token %}
 														<p>
 														<input type="hidden" name="delete_sp" value={{ sportsmen.id }}>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen">Удалить</button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen"><i class="fe fe-trash"></i></button>
 														</p>
 													</form>
 												</td>
@@ -107,7 +106,6 @@
 										</table>
 										{% endif %}
 										<!-- ТАБЛИЦА -->
-									</div>
 								</div>
 							</div>
 						</div>
@@ -141,7 +139,6 @@
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
-													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit2">Сохранить</button>
 												</div>
 											</div>
@@ -153,19 +150,19 @@
 						<div class="col-lg-8">
 							<div class="card">
 								<div class="card-header">
-									<h3 class="card-title">Список спортсменов</h3>
+									<h3 class="card-title">Список соревнований</h3>
 								</div>
-								<div class="card-body">
-									<div class="text-wrap">
+								<div class="table-responsive">
+	
 										<!-- ТАБЛИЦА -->
 										{% if competitions.count > 0 %}
-										<table class="table table-bordered"> 
+										<table class="table table-hover table-outline table-vcenter text-nowrap card-table"> 
 											<tr>
-												<td>ID</td>
-												<td>Дата</td>
-												<td>Место</td>
-												<td>Статус</td>
-												<td></td>
+												<th>ID</th>
+												<th>Дата</th>
+												<th>Место</th>
+												<th>Статус</th>
+												<th></th>
 											</tr>
 											{% for competition in competitions %}
 											<tr>
@@ -178,7 +175,7 @@
 														{% csrf_token %}
 														<p>
 														<input type="hidden" name="delete_comp" value={{ competition.id }}>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition">Удалить</button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition"><i class="fe fe-trash"></i></button>
 														</p>
 													</form>
 												</td>            
@@ -187,7 +184,7 @@
 										</table>
 										{% endif %}
 										<!-- ТАБЛИЦА -->
-									</div>
+
 								</div>
 							</div>
 						</div>
@@ -221,7 +218,7 @@
 												<label class="form-label">Дисциплина</label>
 												<input type="text" class="form-control" name="discipline">
 												<label class="form-label">ID соревнования</label>
-												<select size="1" name="competitionid"> {% if competitions.count > 0 %}
+												<select class="form-control" name="competitionid"> {% if competitions.count > 0 %}
 													{% for competition in competitions %}
 											   			<option value="{{ competition.id }}">{{ competition.id }} ({{ competition.place }})</option>
 											    	{% endfor %}
@@ -229,7 +226,7 @@
 											   	</select>
 												<!--<input type="number" class="form-control" name="competitionid">-->
 												<label class="form-label">ID спортсмена</label>
-												<select size="1" name="sportsmenid"> {% if sportsmens.count > 0 %}
+												<select class="form-control" name="sportsmenid"> {% if sportsmens.count > 0 %}
 													{% for sportsmen in sportsmens %}
 											   			<option value="{{ sportsmen.id }}">{{ sportsmen.id }} ({{ sportsmen.surname }} {{ sportsmen.name }} {{ sportsmen.patronymic }})</option>
 											    	{% endfor %}
@@ -237,7 +234,7 @@
 											   	</select>
 												<!--<input type="number" class="form-control" name="sportsmenid">-->
 												<label class="form-label">ID судьи</label>
-												<select size="1" name="judgeid"> {% if judges.count > 0 %}
+												<select class="form-control" name="judgeid"> {% if judges.count > 0 %}
 													{% for judge in judges %}
 											   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
 											    	{% endfor %}
@@ -249,7 +246,6 @@
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
-													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit4">Сохранить</button>
 												</div>
 											</div>
@@ -263,20 +259,20 @@
 								<div class="card-header">
 									<h3 class="card-title">Список результатов</h3>
 								</div>
-								<div class="card-body">
-									<div class="text-wrap">
+								<div class="table-responsive">
+
 										<!-- ТАБЛИЦА -->
 										{% if results.count > 0 %}
-										<table class="table table-bordered"> 
+										<table class="table table-hover table-outline table-vcenter  card-table"> 
 											<tr>
-												<td>ID</td>
-												<td>ID Спортсмена</td>
-												<td>ID Соревнов.</td>
-												<td>ID Судьи</td>
-												<td>Имя</td>
-												<td>Дисциплина</td>
-												<td>Платфора</td>
-												<td></td>
+												<th>ID</th>
+												<th>ID Спортсмена</th>
+												<th>ID Соревнов.</th>
+												<th>ID Судьи</th>
+												<th>Имя Тренера</th>
+												<th>Дисциплина</th>
+												<th>Платфора</th>
+												<th></th>
 											</tr>
 
 											{% for result in results %}
@@ -295,7 +291,7 @@
 														{% csrf_token %}
 														<p>
 														<input type="hidden" name="delete_res" value={{ result.id }}>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_result">Удалить</button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_result"><i class="fe fe-trash"></i></button>
 														</p>
 													</form>
 												</td>            
@@ -304,7 +300,7 @@
 										</table>
 										{% endif %}
 										<!-- ТАБЛИЦА -->
-									</div>
+
 								</div>
 							</div>
 						</div>
@@ -338,7 +334,6 @@
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
-													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit3">Сохранить</button>
 												</div>
 											</div>
@@ -352,14 +347,14 @@
 								<div class="card-header">
 									<h3 class="card-title">Список судей</h3>
 								</div>
-								<div class="card-body">
-									<div class="text-wrap">
+								<div class="table-responsive">
+
 										<!-- ТАБЛИЦА -->
 										{% if judges.count > 0 %}
-										<table class="table table-bordered"> 
+										<table class="table table-hover table-outline table-vcenter text-nowrap card-table"> 
 											<tr>
-												<td>ID</td>
-												<td>Имя</td>
+												<th>ID</th>
+												<th>Имя</th>
 
 											</tr>
 
@@ -374,7 +369,7 @@
 														{% csrf_token %}
 														<p>
 														<input type="hidden" name="delete_jud" value={{ judge.id }}>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge">Удалить</button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge"><i class="fe fe-trash"></i></button>
 														</p>
 													</form>
 												</td>            
@@ -383,7 +378,7 @@
 										</table>
 										{% endif %}
 										<!-- ТАБЛИЦА -->
-									</div>
+
 								</div>
 							</div>
 						</div>

@@ -26,6 +26,12 @@
 			  baseUrl: '.'
 		  }); 
 		</script>
+
+		<script>
+		function clearForms() {
+		  document.getElementById("submitForm").reset();
+		}
+		</script>
 		<link href="{% static 'assets/css/dashboard.css' %}" rel="stylesheet" />
 		
 		<script type="text/javascript" src="{% static 'assets/js/dashboard.js' %}"></script> 
@@ -49,11 +55,22 @@
 					</a>
 					<div class="d-flex order-lg-2 ml-auto">
 						<div class="nav-item d-none d-md-flex">
+							<!-- Панель управления -->
+								{% if usertype == "J" %}
+							<a class="btn btn-sm btn-outline-primary" href="/judge/">Панель судьи</a>
+								{% elif usertype == "O" %} 
+							<a class="btn btn-sm btn-outline-primary" href="/operator/">Панель управления</a>
+								{% elif usertype == "A" %}
+							<a class="btn btn-sm btn-outline-primary" href="/admin/">Панель управления</a>
+								{% endif %}
+							<!-- Панель управления -->
+						</div>
+						<div class="nav-item d-none d-md-flex">
 							<!-- Кнопка Логина -->
 							{% if not isauth %}
 							<a href="/login/" class="btn btn-sm btn-outline-primary">Войти</a>
 							{% else %}
-							<a href="/logout/" class="btn btn-sm btn-outline-primary">Выйти</a>
+							<a href="/logout/" class="btn btn-sm btn-outline-danger">Выйти</a>
 							{% endif %}
 							<!-- Кнопка Логина -->
 						</div>

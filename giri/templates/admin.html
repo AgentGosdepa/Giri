@@ -56,7 +56,6 @@
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
-													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit1">Сохранить</button>
 												</div>
 											</div>
@@ -70,12 +69,12 @@
 								<div class="card-header">
 									<h3 class="card-title">Список спортсменов</h3>
 								</div>
-								<div class="card-body">
-									<div class="text-wrap">
+								<div class="table-responsive">
 										<!-- ТАБЛИЦА -->
 										{% if sportsmens.count > 0 %}
-										<table class="table table-bordered"> 
+										<table class="table table-hover table-outline table-vcenter text-nowrap card-table"> 
 											<tr>
+<<<<<<< HEAD
 												<td>ID</td>
 												<td>Фамилия</td>
 												<td>Имя</td>
@@ -84,6 +83,14 @@
 												<td>Категория</td>
 												<td>День рождения</td>
 												<td></td>
+=======
+												<th>ID</th>
+												<th>Имя</th>
+												<th>Регион</th>
+												<th>День рождения</th>
+												<th>Категория</th>
+												<th></th>
+>>>>>>> 135ce5d1a1de6fec5fb42b14b20b165a68416863
 											</tr>
 											{% for sportsmen in sportsmens %}
 											<tr>
@@ -98,12 +105,22 @@
 												<td><input type="text" size=7 name="sportsmen_category_field" value="{{ sportsmen.category }}"></td>
 												<td><input type="date" size=7 name="sportsmen_dateofbirth_field" value="{{ sportsmen.dateofbirth|date:"Y-m-d" }}"></td>
 												<td>
+<<<<<<< HEAD
 													<p>
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen">Удалить</button>
 													</p>
 													<p>
 														<button type="submit" class="btn btn-success ml-auto" name="save_sportsmen">Сохранить</button>
 													</p>
+=======
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_sp" value={{ sportsmen.id }}>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen"><i class="fe fe-trash"></i></button>
+														</p>
+													</form>
+>>>>>>> 135ce5d1a1de6fec5fb42b14b20b165a68416863
 												</td>
 												</form>
 											</tr>
@@ -111,7 +128,7 @@
 										</table>
 										{% endif %}
 										<!-- ТАБЛИЦА -->
-									</div>
+
 								</div>
 							</div>
 						</div>
@@ -145,7 +162,6 @@
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
-													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit2">Сохранить</button>
 												</div>
 											</div>
@@ -159,17 +175,16 @@
 								<div class="card-header">
 									<h3 class="card-title">Список соревнований</h3>
 								</div>
-								<div class="card-body">
-									<div class="text-wrap">
+								<div class="table-responsive">
 										<!-- ТАБЛИЦА -->
 										{% if competitions.count > 0 %}
-										<table class="table table-bordered"> 
+										<table class="table table-hover table-outline table-vcenter text-nowrap card-table"> 
 											<tr>
-												<td>ID</td>
-												<td>Дата</td>
-												<td>Место</td>
-												<td>Статус</td>
-												<td></td>
+												<th>ID</th>
+												<th>Дата</th>
+												<th>Место</th>
+												<th>Статус</th>
+												<th></th>
 											</tr>
 											{% for competition in competitions %}
 											<tr>
@@ -183,6 +198,7 @@
 												<td><input type="text" class="form-control" name="competition_place_field" value="{{ competition.place }}"></td>
 												<td><input type="text" class="form-control" name="competition_status_field" value="{{ competition.status }}"></td>
 												<td>
+<<<<<<< HEAD
 													<p>
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition">Удалить</button>
 													</p>
@@ -191,13 +207,21 @@
 													</p>
 												</td>
 												</form>
+=======
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_comp" value={{ competition.id }}>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition"><i class="fe fe-trash"></i></button>
+														</p>
+													</form>
+>>>>>>> 135ce5d1a1de6fec5fb42b14b20b165a68416863
 												</td>            
 											</tr>
 											{% endfor %}
 										</table>
 										{% endif %}
 										<!-- ТАБЛИЦА -->
-									</div>
 								</div>
 							</div>
 						</div>
@@ -235,7 +259,7 @@
 												<label class="form-label">Помост</label>
 												<input type="number" class="form-control" name="platform">
 												<label class="form-label">ID соревнования</label>
-												<select size="1" name="competitionid"> {% if competitions.count > 0 %}
+												<select class="form-control" name="competitionid"> {% if competitions.count > 0 %}
 													{% for competition in competitions %}
 											   			<option value="{{ competition.id }}">{{ competition.id }} ({{ competition.place }})</option>
 											    	{% endfor %}
@@ -243,8 +267,12 @@
 											   	</select>
 												<!--<input type="number" class="form-control" name="competitionid">-->
 												<label class="form-label">ID спортсмена</label>
+<<<<<<< HEAD
 												<select size="1" name="sportsmenid"> 
 												{% if sportsmens.count > 0 %}
+=======
+												<select class="form-control" name="sportsmenid"> {% if sportsmens.count > 0 %}
+>>>>>>> 135ce5d1a1de6fec5fb42b14b20b165a68416863
 													{% for sportsmen in sportsmens %}
 											   			<option value="{{ sportsmen.id }}">{{ sportsmen.id }} ({{ sportsmen.surname }} {{ sportsmen.name }} {{ sportsmen.patronymic }})</option>
 											    	{% endfor %}
@@ -252,8 +280,12 @@
 											   	</select>
 												<!--<input type="number" class="form-control" name="sportsmenid">-->
 												<label class="form-label">ID судьи</label>
+<<<<<<< HEAD
 												<select size="1" name="judgeid"> 
 												{% if judges.count > 0 %}
+=======
+												<select class="form-control" name="judgeid"> {% if judges.count > 0 %}
+>>>>>>> 135ce5d1a1de6fec5fb42b14b20b165a68416863
 													{% for judge in judges %}
 											   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
 											    	{% endfor %}
@@ -263,7 +295,6 @@
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
-													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit4">Сохранить</button>
 												</div>
 											</div>
@@ -277,12 +308,12 @@
 								<div class="card-header">
 									<h3 class="card-title">Список результатов</h3>
 								</div>
-								<div class="card-body">
-									<div class="text-wrap">
+								<div class="table-responsive">
 										<!-- ТАБЛИЦА -->
 										{% if results.count > 0 %}
-										<table class="table table-bordered"> 
+										<table class="table table-hover table-outline table-vcenter  card-table"> 
 											<tr>
+<<<<<<< HEAD
 												<td>ID</td>
 												<td>ID Спортсмена</td>
 												<td>ID Соревнов.</td>
@@ -294,6 +325,16 @@
 												<td>Имя тренера</td>
 												<td>Отчество тренера</td>
 												<td></td>
+=======
+												<th>ID</th>
+												<th>ID Спортсмена</th>
+												<th>ID Соревнов.</th>
+												<th>ID Судьи</th>
+												<th>Результат</th>
+												<th>Имя Тренера</th>
+												<th>Дисциплина</th>
+												<th></th>
+>>>>>>> 135ce5d1a1de6fec5fb42b14b20b165a68416863
 											</tr>
 
 											{% for result in results %}
@@ -305,6 +346,7 @@
 													{{ result.id }}
 												</td>
 												<td>
+<<<<<<< HEAD
 													{{ result.sportsmenid.id }} ({{ result.sportsmenid.surname }} {{ result.sportsmenid.name }} {{ result.sportsmenid.patronymic }})
 												</td>
 												<td>
@@ -334,12 +376,21 @@
 													</p>
 												</td>    
 												</form>        
+=======
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_res" value={{ result.id }}>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_result"><i class="fe fe-trash"></i></button>
+														</p>
+													</form>
+												</td>            
+>>>>>>> 135ce5d1a1de6fec5fb42b14b20b165a68416863
 											</tr>
 											{% endfor %}
 										</table>
 										{% endif %}
 										<!-- ТАБЛИЦА -->
-									</div>
 								</div>
 							</div>
 						</div>
@@ -373,7 +424,6 @@
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
-													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit3">Сохранить</button>
 												</div>
 											</div>
@@ -387,17 +437,16 @@
 								<div class="card-header">
 									<h3 class="card-title">Список судей</h3>
 								</div>
-								<div class="card-body">
-									<div class="text-wrap">
+								<div class="table-responsive">
 										<!-- ТАБЛИЦА -->
 										{% if judges.count > 0 %}
-										<table class="table table-bordered"> 
+										<table class="table table-hover table-outline table-vcenter text-nowrap card-table"> 
 											<tr>
-												<td>ID</td>
-												<td>Фамилия</td>
-												<td>Имя</td>
-												<td>Отчество</td>
-												<td>Действие</td>
+												<th>ID</th>
+												<th>Фамилия</th>
+												<th>Имя</th>
+												<th>Отчество</th>
+												<th>Действие</th>
 											</tr>
 
 											{% for judge in judges %}
@@ -410,6 +459,7 @@
 												<td><input type="text" class="form-control" name="judge_judgename_field" value="{{ judge.judgename }}"></td>
 												<td><input type="text" class="form-control" name="judge_judgepatronymic_field" value="{{ judge.judgepatronymic }}"></td>
 												<td>
+<<<<<<< HEAD
 													<p>
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge">Удалить</button>
 													</p>
@@ -418,12 +468,28 @@
 													</p>											
 												</td>
 												</form>		            
+=======
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_jud" value={{ judge.id }}>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge"><i class="fe fe-trash"></i></button>
+														</p>
+													</form>
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_jud" value={{ judge.id }}>
+														<button type="submit" class="btn btn-success ml-auto" name="save_judge"><i class="fe fe-save"></i></button>
+														</p>
+													</form>													
+												</td>            
+>>>>>>> 135ce5d1a1de6fec5fb42b14b20b165a68416863
 											</tr>
 											{% endfor %}
 										</table>
 										{% endif %}
 										<!-- ТАБЛИЦА -->
-									</div>
 								</div>
 							</div>
 						</div>
@@ -454,7 +520,7 @@
 												<input type="text" class="form-control" name="password">
 												<label class="form-label">Тип</label>
 
-												<select size="1" name="permission"> 
+												<select class="form-control" name="permission"> 
 													<option value="U">User</option>
 													<option value="J">Judge</option>
 													<option value="O">Operator</option>
@@ -462,7 +528,7 @@
 												</select>
 												<!--<input type="text" class="form-control" name="permission">-->
 												<label class="form-label">ID</label>
-												<select size="1" name="judgeid"> {% if judges.count > 0 %}
+												<select class="form-control" name="judgeid"> {% if judges.count > 0 %}
 													{% for judge in judges %}
 											   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
 											    	{% endfor %}
@@ -471,7 +537,7 @@
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
-													<a href="javascript:void(0)" class="btn btn-link">Сбросить</a>
+													
 													<button type="submit" class="btn btn-primary ml-auto" name="submit5">Сохранить</button>
 												</div>
 											</div>
@@ -485,17 +551,16 @@
 								<div class="card-header">
 									<h3 class="card-title">Список пользователей</h3>
 								</div>
-								<div class="card-body">
-									<div class="text-wrap">
+								<div class="table-responsive">
 										<!-- ТАБЛИЦА -->
 										{% if users.count > 0 %}
-										<table class="table table-bordered"> 
+										<table class="table table-hover table-outline table-vcenter text-nowrap card-table"> 
 											<tr>
-												<td>Id</td>
-												<td>Логин</td>
-												<td>Пароль</td>
-												<td>Тип</td>
-												<td>JudgeId</td>
+												<th>Id</th>
+												<th>Логин</th>
+												<th>Пароль</th>
+												<th>Тип</th>
+												<th>JudgeId</th>
 											</tr>
 
 											{% for user in users %}
@@ -507,6 +572,7 @@
 												<td><input type="text" class="form-control" name="user_username_field" value="{{ user.username }}"></td>
 												<td><input type="text" class="form-control" name="user_password_field" value="{{ user.password }}"></td>
 												<td>
+<<<<<<< HEAD
 												<select size="1" name="user_permission_field"> 
 													<option {% if user.permission == "U" %} selected {% endif %} value="U">User</option>
 													<option {% if user.permission == "J" %} selected {% endif %} value="J">Judge</option>
@@ -524,12 +590,21 @@
 													</p>											
 												</td>
 												</form>		                  
+=======
+													<form method="POST">
+														{% csrf_token %}
+														<p>
+														<input type="hidden" name="delete_use" value={{ user.id }}>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_user"><i class="fe fe-trash"></i></button>
+														</p>
+													</form>
+												</td>            
+>>>>>>> 135ce5d1a1de6fec5fb42b14b20b165a68416863
 											</tr>
 											{% endfor %}
 										</table>
 										{% endif %}
 										<!-- ТАБЛИЦА -->
-									</div>
 								</div>
 							</div>
 						</div>

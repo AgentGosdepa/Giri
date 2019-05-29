@@ -391,4 +391,5 @@ def logout(request):
 
 # Profile form page
 def profile(request):
-	return render(request, "profile.html", {"results": Result.objects.all()})
+	return render(request, "profile.html", {"results": Result.objects.all(),
+	"competitions": Competition.objects.all()})
