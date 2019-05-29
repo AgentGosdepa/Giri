@@ -65,7 +65,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8">
+						<div class="col-lg-18">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Список спортсменов</h3>
@@ -77,30 +77,35 @@
 										<table class="table table-bordered"> 
 											<tr>
 												<td>ID</td>
+												<td>Фамилия</td>
 												<td>Имя</td>
+												<td>Отчество</td>
 												<td>Регион</td>
-												<td>День рождения</td>
 												<td>Категория</td>
+												<td>День рождения</td>
 												<td></td>
 											</tr>
 											{% for sportsmen in sportsmens %}
 											<tr>
-												<td>{{ sportsmen.id }}</td>
-												<td>{{ sportsmen.surname }}
-												{{ sportsmen.name }}
-												{{ sportsmen.patronymic }}</td>
-												<td>{{ sportsmen.region }}</td>
-												<td>{{ sportsmen.dateofbirth }}</td>
-												<td>{{ sportsmen.category }}</td>
+												<form method="POST">
+												{% csrf_token %}
+												<input type="hidden" name="sportsmen_id" value={{ sportsmen.id }}>
+												<td><input type="text" size=1 name="sportsmen_id_field" value="{{ sportsmen.id }}" disabled></td>
+												<td><input type="text" size=7 name="sportsmen_surname_field" value="{{ sportsmen.surname }}"></td>
+												<td><input type="text" size=7 name="sportsmen_name_field" value="{{ sportsmen.name }}"></td>
+												<td><input type="text" size=7 name="sportsmen_patronymic_field" value="{{ sportsmen.patronymic }}"></td>
+												<td><input type="text" size=10 name="sportsmen_region_field" value="{{ sportsmen.region }}"></td>
+												<td><input type="text" size=7 name="sportsmen_category_field" value="{{ sportsmen.category }}"></td>
+												<td><input type="date" size=7 name="sportsmen_dateofbirth_field" value="{{ sportsmen.dateofbirth|date:"Y-m-d" }}"></td>
 												<td>
-													<form method="POST">
-														{% csrf_token %}
-														<p>
-														<input type="hidden" name="delete_sp" value={{ sportsmen.id }}>
+													<p>
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen">Удалить</button>
-														</p>
-													</form>
+													</p>
+													<p>
+														<button type="submit" class="btn btn-success ml-auto" name="save_sportsmen">Сохранить</button>
+													</p>
 												</td>
+												</form>
 											</tr>
 											{% endfor %}
 										</table>
@@ -152,7 +157,7 @@
 						<div class="col-lg-8">
 							<div class="card">
 								<div class="card-header">
-									<h3 class="card-title">Список спортсменов</h3>
+									<h3 class="card-title">Список соревнований</h3>
 								</div>
 								<div class="card-body">
 									<div class="text-wrap">
@@ -168,18 +173,24 @@
 											</tr>
 											{% for competition in competitions %}
 											<tr>
-												<td>{{ competition.id }}</td>
-												<td>{{ competition.date }}</td>
-												<td>{{ competition.place }}</td>
-												<td>{{ competition.status }}</td>
+												<form method="POST">
+												{% csrf_token %}
+												<input type="hidden" name="competition_id" value={{ competition.id }}>
+												<td><input type="text" class="form-control" name="competition_id_field" value="{{ competition.id }}" disabled></td>
 												<td>
-													<form method="POST">
-														{% csrf_token %}
-														<p>
-														<input type="hidden" name="delete_comp" value={{ competition.id }}>
+													<input type="date" class="form-control" name="competition_date_field" value="{{ competition.date|date:"Y-m-d" }}">
+												</td>
+												<td><input type="text" class="form-control" name="competition_place_field" value="{{ competition.place }}"></td>
+												<td><input type="text" class="form-control" name="competition_status_field" value="{{ competition.status }}"></td>
+												<td>
+													<p>
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition">Удалить</button>
-														</p>
-													</form>
+													</p>
+													<p>
+														<button type="submit" class="btn btn-success ml-auto" name="save_competition">Сохранить</button>
+													</p>
+												</td>
+												</form>
 												</td>            
 											</tr>
 											{% endfor %}
@@ -221,6 +232,8 @@
 												<input type="number" class="form-control" name="result">
 												<label class="form-label">Дисциплина</label>
 												<input type="text" class="form-control" name="discipline">
+												<label class="form-label">Помост</label>
+												<input type="number" class="form-control" name="platform">
 												<label class="form-label">ID соревнования</label>
 												<select size="1" name="competitionid"> {% if competitions.count > 0 %}
 													{% for competition in competitions %}
@@ -230,7 +243,8 @@
 											   	</select>
 												<!--<input type="number" class="form-control" name="competitionid">-->
 												<label class="form-label">ID спортсмена</label>
-												<select size="1" name="sportsmenid"> {% if sportsmens.count > 0 %}
+												<select size="1" name="sportsmenid"> 
+												{% if sportsmens.count > 0 %}
 													{% for sportsmen in sportsmens %}
 											   			<option value="{{ sportsmen.id }}">{{ sportsmen.id }} ({{ sportsmen.surname }} {{ sportsmen.name }} {{ sportsmen.patronymic }})</option>
 											    	{% endfor %}
@@ -238,7 +252,8 @@
 											   	</select>
 												<!--<input type="number" class="form-control" name="sportsmenid">-->
 												<label class="form-label">ID судьи</label>
-												<select size="1" name="judgeid"> {% if judges.count > 0 %}
+												<select size="1" name="judgeid"> 
+												{% if judges.count > 0 %}
 													{% for judge in judges %}
 											   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
 											    	{% endfor %}
@@ -257,7 +272,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8">
+						<div class="col-lg-18">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Список результатов</h3>
@@ -272,32 +287,53 @@
 												<td>ID Спортсмена</td>
 												<td>ID Соревнов.</td>
 												<td>ID Судьи</td>
+												<td>Помост</td>
 												<td>Результат</td>
-												<td>Имя</td>
 												<td>Дисциплина</td>
+												<td>Фамилия тренера</td>
+												<td>Имя тренера</td>
+												<td>Отчество тренера</td>
 												<td></td>
 											</tr>
 
 											{% for result in results %}
 											<tr>
-												<td>{{ result.id }}</td>
-												<td>{{ result.sportsmenid.id }} ({{ result.sportsmenid.surname }} {{ result.sportsmenid.name }} {{ result.sportsmenid.patronymic }})</td>
-												<td>{{ result.competitionid.id }} ({{ result.competitionid.place }})</td>
-												<td>{{ result.judgeid.id }} ({{ result.judgeid.judgesurname }} {{ result.judgeid.judgename }} {{ result.judgeid.judgepatronymic }})</td>
-												<td>{{ result.result }}</td>
-												<td>{{ result.mastername }}
-												{{ result.mastersurname }}
-												{{ result.masterpatronymic }}</td>
-												<td>{{ result.discipline }}</td>
+												<form method="POST">
+												{% csrf_token %}
+												<input type="hidden" name="result_id" value={{ result.id }}>
 												<td>
-													<form method="POST">
-														{% csrf_token %}
-														<p>
-														<input type="hidden" name="delete_res" value={{ result.id }}>
+													{{ result.id }}
+												</td>
+												<td>
+													{{ result.sportsmenid.id }} ({{ result.sportsmenid.surname }} {{ result.sportsmenid.name }} {{ result.sportsmenid.patronymic }})
+												</td>
+												<td>
+													{{ result.competitionid.id }} ({{ result.competitionid.place }})
+												</td>
+												<td>
+												<select size=1 name="result_judgeid_field">
+													{% if judges.count > 0 %}
+														{% for judge in judges %}
+												   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgename }} {{ judge.judgesurname }} {{ judge.judgepatronymic }})</option>
+												    	{% endfor %}
+											    	{% endif %}
+											   	</select>
+												</td>
+												<td><input type="text" class="form-control" name="result_platform_field" value="{{ result.platform }}"></td>
+												<td><input type="text" class="form-control" name="result_result_field" value="{{ result.result }}"></td>
+												<td><input type="text" class="form-control" name="result_discipline_field" value="{{ result.discipline }}"></td>
+												<td><input type="text" size=7 name="result_mastername_field" value="{{ result.mastername }}"></td>
+												<td><input type="text" size=7 name="result_mastersurname_field" value="{{ result.mastersurname }}"></td>
+												<td><input type="text" size=7 name="result_masterpatronymic_field" value="{{ result.masterpatronymic }}"></td>
+												<td>												
+													<p>
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_result">Удалить</button>
-														</p>
-													</form>
-												</td>            
+													</p>
+													<p>
+														<button type="submit" class="btn btn-success ml-auto" name="save_result">Сохранить</button>
+													</p>
+												</td>    
+												</form>        
 											</tr>
 											{% endfor %}
 										</table>
@@ -366,27 +402,22 @@
 
 											{% for judge in judges %}
 											<tr>
-												<td><input type="text" class="form-control" name="id" value="{{ judge.id }}" disabled></td>
-												<td><input type="text" class="form-control" name="judgesurname" value="{{ judge.judgesurname }}"></td>
-												<td><input type="text" class="form-control" name="judgename" value="{{ judge.judgename }}"></td>
-												<td><input type="text" class="form-control" name="judgepatronymic" value="{{ judge.judgepatronymic }}">
-												
+												<form method="POST">
+												{% csrf_token %}
+												<input type="hidden" name="judge_id" value={{ judge.id }}>
+												<td><input type="text" class="form-control" name="judge_id_field" value="{{ judge.id }}" disabled></td>
+												<td><input type="text" class="form-control" name="judge_judgesurname_field" value="{{ judge.judgesurname }}"></td>
+												<td><input type="text" class="form-control" name="judge_judgename_field" value="{{ judge.judgename }}"></td>
+												<td><input type="text" class="form-control" name="judge_judgepatronymic_field" value="{{ judge.judgepatronymic }}"></td>
 												<td>
-													<form method="POST">
-														{% csrf_token %}
-														<p>
-														<input type="hidden" name="delete_jud" value={{ judge.id }}>
+													<p>
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge">Удалить</button>
-														</p>
-													</form>
-													<form method="POST">
-														{% csrf_token %}
-														<p>
-														<input type="hidden" name="delete_jud" value={{ judge.id }}>
+													</p>
+													<p>
 														<button type="submit" class="btn btn-success ml-auto" name="save_judge">Сохранить</button>
-														</p>
-													</form>													
-												</td>            
+													</p>											
+												</td>
+												</form>		            
 											</tr>
 											{% endfor %}
 										</table>
@@ -469,20 +500,30 @@
 
 											{% for user in users %}
 											<tr>
-												<td>{{ user.id }}</td>
-												<td>{{ user.username }}</td>
-												<td>{{ user.password }}</td>
-												<td>{{ user.permission }}</td>
-												<td>{{ user.judgeid }}</td>
+												<form method="POST">
+												{% csrf_token %}
+												<input type="hidden" name="user_id" value={{ user.id }}>
+												<td><input type="text" class="form-control" name="user_id_field" value="{{ user.id }}" disabled></td>
+												<td><input type="text" class="form-control" name="user_username_field" value="{{ user.username }}"></td>
+												<td><input type="text" class="form-control" name="user_password_field" value="{{ user.password }}"></td>
 												<td>
-													<form method="POST">
-														{% csrf_token %}
-														<p>
-														<input type="hidden" name="delete_use" value={{ user.id }}>
+												<select size="1" name="user_permission_field"> 
+													<option {% if user.permission == "U" %} selected {% endif %} value="U">User</option>
+													<option {% if user.permission == "J" %} selected {% endif %} value="J">Judge</option>
+													<option {% if user.permission == "O" %} selected {% endif %} value="O">Operator</option>
+													<option {% if user.permission == "A" %} selected {% endif %} value="A">Administrator</option>
+												</select>
+												</td>
+												<td><input type="text" class="form-control" name="user_judgeid_field" value="{{ user.judgeid }}"></td>
+												<td>
+													<p>
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_user">Удалить</button>
-														</p>
-													</form>
-												</td>            
+													</p>
+													<p>
+														<button type="submit" class="btn btn-success ml-auto" name="save_user">Сохранить</button>
+													</p>											
+												</td>
+												</form>		                  
 											</tr>
 											{% endfor %}
 										</table>
