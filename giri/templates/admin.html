@@ -307,7 +307,7 @@
 												<select size=1 name="result_judgeid_field">
 													{% if judges.count > 0 %}
 														{% for judge in judges %}
-												   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgename }} {{ judge.judgesurname }} {{ judge.judgepatronymic }})</option>
+												   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
 												    	{% endfor %}
 											    	{% endif %}
 											   	</select>
@@ -315,8 +315,8 @@
 												<td><input type="text" class="form-control" name="result_platform_field" value="{{ result.platform }}"></td>
 												<td><input type="text" class="form-control" name="result_result_field" value="{{ result.result }}"></td>
 												<td><input type="text" class="form-control" name="result_discipline_field" value="{{ result.discipline }}"></td>
-												<td><input type="text" size=7 name="result_mastername_field" value="{{ result.mastername }}"></td>
 												<td><input type="text" size=7 name="result_mastersurname_field" value="{{ result.mastersurname }}"></td>
+												<td><input type="text" size=7 name="result_mastername_field" value="{{ result.mastername }}"></td>
 												<td><input type="text" size=7 name="result_masterpatronymic_field" value="{{ result.masterpatronymic }}"></td>
 												<td>												
 													<p>

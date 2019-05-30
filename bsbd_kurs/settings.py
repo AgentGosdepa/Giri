@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -85,6 +87,12 @@ DATABASES = {
     }
 }
 
+'''
+DATABASES = {
+    "default": dj_database_url.config(default='postgres://acaqbcilaqkzim:e0a9d2d371235f20361a25567f5c1eb2dd182e2da9e7b2b8b0989d1efbd0a63c@ec2-54-247-178-166.eu-west-1.compute.amazonaws.com:5432/d6cknqkmu3st3e')
+}
+'''
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -130,3 +138,4 @@ STATICFILES_DIRS = [
 
 ]
 
+django_heroku.settings(locals())
