@@ -30,32 +30,55 @@
 			<div class="my-3 my-md-5">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить спортсмена</h3>
 								</div>
 								<div class="card-body">
 									<div class="text-wrap">
-										<p class="text-justify">Данная форма позволяет добавить нового спортсмена в Базу Данных.</p>
 										<form method="POST">
 										{% csrf_token %}
 											<div class="form-group">
-												<label class="form-label">Фамилия</label>
-												<input type="text" class="form-control" name="surname" placeholder="Иванов">
-												<label class="form-label">Имя</label>
-												<input type="text" class="form-control" name="name" placeholder="Иван">
-												<label class="form-label">Отчество</label>
-												<input type="text" class="form-control" name="patronymic" placeholder="Иванович">
-												<label class="form-label">Регион</label>
-												<input type="text" class="form-control" name="region">
-												<label class="form-label">Категория</label>
-												<input type="text" class="form-control" name="category">
-												<label class="form-label">День рождения</label>
-												<input type="date" class="form-control" name="birthday">
+												<div class = "row">
+													<div class ="col">
+														<label class="form-label">Фамилия</label>
+														<input type="text" class="form-control" name="surname" placeholder="Иванов">
+													</div>
+													<div class ="col">
+														<label class="form-label">Имя</label>
+														<input type="text" class="form-control" name="name" placeholder="Иван">
+													</div>
+													<div class ="col">
+														<label class="form-label">Отчество</label>
+														<input type="text" class="form-control" name="patronymic" placeholder="Иванович">
+													</div>
+												</div>
+												<div class = "row">
+													<div class ="col">
+														<label class="form-label">Регион</label>
+														<input type="text" class="form-control" name="region">
+													</div>
+													<div class ="col">
+														<label class="form-label">Категория</label>
+														<input type="text" class="form-control" name="category">
+													</div>
+													<div class ="col">
+														<label class="form-label">День рождения</label>
+														<input type="date" class="form-control" name="birthday">
+													</div>
+													<div class ="col">
+														<label class="form-label">Пол</label>
+														<select class="custom-select" name="gender"> 
+															<option value="man">Мужской</option>
+															<option value="woman">Женщина</option>
+														</select>
+													</div>
+												</div>
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
+													<p class="text-left">Данная форма позволяет добавить нового спортсмена в Базу Данных.</p>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit1">Сохранить</button>
 												</div>
 											</div>
@@ -64,7 +87,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-18">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Список спортсменов</h3>
@@ -74,33 +97,33 @@
 										{% if sportsmens.count > 0 %}
 										<table class="table table-hover table-outline table-vcenter text-nowrap card-table"> 
 											<tr>
-												<td>ID</td>
-												<td>Фамилия</td>
-												<td>Имя</td>
-												<td>Отчество</td>
-												<td>Регион</td>
-												<td>Категория</td>
-												<td>День рождения</td>
-												<td></td>
+												<th>ID</th>
+												<th>Фамилия</th>
+												<th>Имя</th>
+												<th>Отчество</th>
+												<th>Регион</th>
+												<th>Категория</th>
+												<th>День рождения</th>
+												<th></th>
 											</tr>
 											{% for sportsmen in sportsmens %}
 											<tr>
 												<form method="POST">
 												{% csrf_token %}
-												<input type="hidden" name="sportsmen_id" value={{ sportsmen.id }}>
-												<td><input type="text" size=1 name="sportsmen_id_field" value="{{ sportsmen.id }}" disabled></td>
-												<td><input type="text" size=7 name="sportsmen_surname_field" value="{{ sportsmen.surname }}"></td>
-												<td><input type="text" size=7 name="sportsmen_name_field" value="{{ sportsmen.name }}"></td>
-												<td><input type="text" size=7 name="sportsmen_patronymic_field" value="{{ sportsmen.patronymic }}"></td>
-												<td><input type="text" size=10 name="sportsmen_region_field" value="{{ sportsmen.region }}"></td>
-												<td><input type="text" size=7 name="sportsmen_category_field" value="{{ sportsmen.category }}"></td>
-												<td><input type="date" size=7 name="sportsmen_dateofbirth_field" value="{{ sportsmen.dateofbirth|date:"Y-m-d" }}"></td>
+												<input type="hidden" class="form" name="sportsmen_id" value={{ sportsmen.id }}>
+												<td><p class="text-center">{{ sportsmen.id }}</p></td>
+												<td><input type="text" class="form-control" size=7 name="sportsmen_surname_field" value="{{ sportsmen.surname }}"></td>
+												<td><input type="text" class="form-control" size=7 name="sportsmen_name_field" value="{{ sportsmen.name }}"></td>
+												<td><input type="text" class="form-control" size=7 name="sportsmen_patronymic_field" value="{{ sportsmen.patronymic }}"></td>
+												<td><input type="text" class="form-control" size=10 name="sportsmen_region_field" value="{{ sportsmen.region }}"></td>
+												<td><input type="text" class="form-control" size=7 name="sportsmen_category_field" value="{{ sportsmen.category }}"></td>
+												<td><input type="date" class="form-control" size=7 name="sportsmen_dateofbirth_field" value="{{ sportsmen.dateofbirth|date:"Y-m-d" }}"></td>
 												<td>
 													<p>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen">Удалить</button>
+														<button type="submit" class="btn btn-success ml-auto" name="save_sportsmen"><span class= "fe fe-save"></span></button>
 													</p>
 													<p>
-														<button type="submit" class="btn btn-success ml-auto" name="save_sportsmen">Сохранить</button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen"><span class= "fe fe-trash"></span></button>
 													</p>
 												</td>
 												</form>
@@ -123,26 +146,34 @@
 			<div class="my-3 my-md-5">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить соревнование</h3>
 								</div>
 								<div class="card-body">
 									<div class="text-wrap">
-										<p class="text-justify">Данная форма позволяет добавить новое соревнование в Базу Данных.</p>
 										<form method="POST">
 										{% csrf_token %}
 											<div class="form-group">
-												<label class="form-label">Дата проведения</label>
-												<input type="date" class="form-control" name="date">
-												<label class="form-label">Место</label>
-												<input type="text" class="form-control" name="place" placeholder="Томск">
-												<label class="form-label">Статус соревнований</label>
-												<input type="text" class="form-control" name="status" placeholder="Межвузовские">
+											<div class="row">
+												<div class ="col">
+													<label class="form-label">Дата проведения</label>
+													<input type="date" class="form-control" name="date">
+												</div>
+												<div class ="col">
+													<label class="form-label">Место</label>
+													<input type="text" class="form-control" name="place" placeholder="Томск">
+												</div>
+												<div class ="col">
+													<label class="form-label">Статус соревнований</label>
+													<input type="text" class="form-control" name="status" placeholder="Межвузовские">
+												</div>
+											</div>
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
+													<p class="text-justify">Данная форма позволяет добавить новое соревнование в Базу Данных.</p>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit2">Сохранить</button>
 												</div>
 											</div>
@@ -151,7 +182,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Список соревнований</h3>
@@ -172,7 +203,7 @@
 												<form method="POST">
 												{% csrf_token %}
 												<input type="hidden" name="competition_id" value={{ competition.id }}>
-												<td><input type="text" class="form-control" name="competition_id_field" value="{{ competition.id }}" disabled></td>
+												<td><p class="text-center">{{ competition.id }}</p></td>
 												<td>
 													<input type="date" class="form-control" name="competition_date_field" value="{{ competition.date|date:"Y-m-d" }}">
 												</td>
@@ -180,10 +211,10 @@
 												<td><input type="text" class="form-control" name="competition_status_field" value="{{ competition.status }}"></td>
 												<td>
 													<p>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition">Удалить</button>
+														<button type="submit" class="btn btn-success ml-auto" name="save_competition"><span class= "fe fe-save"></span></button>
 													</p>
 													<p>
-														<button type="submit" class="btn btn-success ml-auto" name="save_competition">Сохранить</button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition"><span class= "fe fe-trash"></span></button>
 													</p>
 												</td>
 												</form>
@@ -206,58 +237,88 @@
 			<div class="my-3 my-md-5">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить результат</h3>
 								</div>
 								<div class="card-body">
 									<div class="text-wrap">
-										<p class="text-justify">Данная форма позволяет добавить новый результат в Базу Данных.</p>
 										<form method="POST">
 										{% csrf_token %}
 											<div class="form-group">
-												<label class="form-label">Фамилия тренера</label>
-												<input type="text" class="form-control" name="mastersurname">
-												<label class="form-label">Имя тренера</label>
-												<input type="text" class="form-control" name="mastername">
-												<label class="form-label">Отчество тренера</label>
-												<input type="text" class="form-control" name="masterpatronymic">
-												<label class="form-label">Результат</label>
-												<input type="number" class="form-control" name="result">
-												<label class="form-label">Дисциплина</label>
-												<input type="text" class="form-control" name="discipline">
-												<label class="form-label">Помост</label>
-												<input type="number" class="form-control" name="platform">
-												<label class="form-label">ID соревнования</label>
-												<select class="form-control" name="competitionid"> {% if competitions.count > 0 %}
-													{% for competition in competitions %}
-											   			<option value="{{ competition.id }}">{{ competition.id }} ({{ competition.place }})</option>
-											    	{% endfor %}
-											    {% endif %}
-											   	</select>
-												<!--<input type="number" class="form-control" name="competitionid">-->
-												<label class="form-label">ID спортсмена</label>
-												<select class="form-control" name="sportsmenid"> 
-												{% if sportsmens.count > 0 %}
-													{% for sportsmen in sportsmens %}
-											   			<option value="{{ sportsmen.id }}">{{ sportsmen.id }} ({{ sportsmen.surname }} {{ sportsmen.name }} {{ sportsmen.patronymic }})</option>
-											    	{% endfor %}
-											    {% endif %}
-											   	</select>
-												<!--<input type="number" class="form-control" name="sportsmenid">-->
-												<label class="form-label">ID судьи</label>
-												<select class="form-control" name="judgeid"> 
-												{% if judges.count > 0 %}
-													{% for judge in judges %}
-											   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
-											    	{% endfor %}
-											    {% endif %}
-											   	</select>												
-												<!--<input type="number" class="form-control" name="judgeid">-->
+											<div class="row">
+												<div class ="col">
+													<label class="form-label">Фамилия тренера</label>
+													<input type="text" class="form-control" name="mastersurname">
+												</div>
+												<div class ="col">
+													<label class="form-label">Имя тренера</label>
+													<input type="text" class="form-control" name="mastername">
+												</div>
+												<div class ="col">
+													<label class="form-label">Отчество тренера</label>
+													<input type="text" class="form-control" name="masterpatronymic">
+												</div>
+												<div class ="col">
+													<label class="form-label">Результат</label>
+													<input type="number" class="form-control" name="result">
+												</div>
+												<div class ="col">
+													<label class="form-label">Дисциплина</label>
+													<input type="text" class="form-control" name="discipline">
+												</div>
+												<div class ="col">
+													<label class="form-label">Помост</label>
+													<input type="number" class="form-control" name="platform">
+												</div>
+											</div>
+											<div class="row">
+												<div class ="col">
+													<label class="form-label">Вес спортсмена</label>
+													<input type="number" class="form-control" name="weightsportsman">
+												</div>
+												<div class ="col">
+													<label class="form-label">Вес снаряда</label>
+													<input type="number" class="form-control" name="weightgiri">
+												</div>
+												<div class ="col">
+													<label class="form-label">ID соревнования</label>
+													<select class="custom-select" name="competitionid"> {% if competitions.count > 0 %}
+														{% for competition in competitions %}
+															<option value="{{ competition.id }}">{{ competition.id }} ({{ competition.place }})</option>
+														{% endfor %}
+													{% endif %}
+													</select>
+													<!--<input type="number" class="form-control" name="competitionid">-->
+												</div>
+												<div class ="col">
+													<label class="form-label">ID спортсмена</label>
+													<select class="custom-select" name="sportsmenid"> 
+													{% if sportsmens.count > 0 %}
+														{% for sportsmen in sportsmens %}
+															<option value="{{ sportsmen.id }}">{{ sportsmen.id }} ({{ sportsmen.surname }} {{ sportsmen.name }} {{ sportsmen.patronymic }})</option>
+														{% endfor %}
+													{% endif %}
+													</select>
+													<!--<input type="number" class="form-control" name="sportsmenid">-->
+												</div>
+												<div class ="col">
+													<label class="form-label">ID судьи</label>
+													<select class="custom-select" name="judgeid"> 
+													{% if judges.count > 0 %}
+														{% for judge in judges %}
+															<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
+														{% endfor %}
+													{% endif %}
+													</select>												
+													<!--<input type="number" class="form-control" name="judgeid">-->
+												</div>
+											</div>
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
+													<p class="text-justify">Данная форма позволяет добавить новый результат в Базу Данных.</p>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit4">Сохранить</button>
 												</div>
 											</div>
@@ -266,7 +327,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-18">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Список результатов</h3>
@@ -304,7 +365,7 @@
 													{{ result.competitionid.id }} ({{ result.competitionid.place }})
 												</td>
 												<td>
-												<select size=1 name="result_judgeid_field">
+												<select class="custom-select" size=1 name="result_judgeid_field">
 													{% if judges.count > 0 %}
 														{% for judge in judges %}
 												   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
@@ -315,15 +376,22 @@
 												<td><input type="text" class="form-control" name="result_platform_field" value="{{ result.platform }}"></td>
 												<td><input type="text" class="form-control" name="result_result_field" value="{{ result.result }}"></td>
 												<td><input type="text" class="form-control" name="result_discipline_field" value="{{ result.discipline }}"></td>
+<<<<<<< HEAD
+												<td><input type="text" class="form-control" size=7 name="result_mastername_field" value="{{ result.mastername }}"></td>
+												<td><input type="text" class="form-control" size=7 name="result_mastersurname_field" value="{{ result.mastersurname }}"></td>
+												<td><input type="text" class="form-control" size=7 name="result_masterpatronymic_field" value="{{ result.masterpatronymic }}"></td>
+												<td>
+=======
 												<td><input type="text" size=7 name="result_mastersurname_field" value="{{ result.mastersurname }}"></td>
 												<td><input type="text" size=7 name="result_mastername_field" value="{{ result.mastername }}"></td>
 												<td><input type="text" size=7 name="result_masterpatronymic_field" value="{{ result.masterpatronymic }}"></td>
 												<td>												
+>>>>>>> 2c9eb2b47deb5bcea9b2935151b50b1366221925
 													<p>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_result">Удалить</button>
-													</p>
+														<button type="submit" class="btn btn-success ml-auto" name="save_result"><span class= "fe fe-save"></span></button>
+													</p>												
 													<p>
-														<button type="submit" class="btn btn-success ml-auto" name="save_result">Сохранить</button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_result"><span class= "fe fe-trash"></span></button>
 													</p>
 												</td>    
 												</form>        
@@ -345,26 +413,34 @@
 			<div class="my-3 my-md-5">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить судью</h3>
 								</div>
 								<div class="card-body">
 									<div class="text-wrap">
-										<p class="text-justify">Данная форма позволяет добавить судью в Базу Данных.</p>
 										<form method="POST">
 										{% csrf_token %}
 											<div class="form-group">
-												<label class="form-label">Фамилия</label>
-												<input type="text" class="form-control" name="judgesurname">
-												<label class="form-label">Имя</label>
-												<input type="text" class="form-control" name="judgename">
-												<label class="form-label">Отчество</label>
-												<input type="text" class="form-control" name="judgepatronymic">
+											<div class="row">
+												<div class ="col">
+													<label class="form-label">Фамилия</label>
+													<input type="text" class="form-control" name="judgesurname">
+												</div>
+												<div class ="col">
+													<label class="form-label">Имя</label>
+													<input type="text" class="form-control" name="judgename">
+												</div>
+												<div class ="col">
+													<label class="form-label">Отчество</label>
+													<input type="text" class="form-control" name="judgepatronymic">
+												</div>
+											</div>
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
+													<p class="text-justify">Данная форма позволяет добавить судью в Базу Данных.</p>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit3">Сохранить</button>
 												</div>
 											</div>
@@ -373,7 +449,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Список судей</h3>
@@ -395,17 +471,17 @@
 												<form method="POST">
 												{% csrf_token %}
 												<input type="hidden" name="judge_id" value={{ judge.id }}>
-												<td><input type="text" class="form-control" name="judge_id_field" value="{{ judge.id }}" disabled></td>
+												<td><p class="text-center">{{ judge.id }}</p></td>
 												<td><input type="text" class="form-control" name="judge_judgesurname_field" value="{{ judge.judgesurname }}"></td>
 												<td><input type="text" class="form-control" name="judge_judgename_field" value="{{ judge.judgename }}"></td>
 												<td><input type="text" class="form-control" name="judge_judgepatronymic_field" value="{{ judge.judgepatronymic }}"></td>
 												<td>
 													<p>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge">Удалить</button>
-													</p>
+														<button type="submit" class="btn btn-success ml-auto" name="save_judge"><span class= "fe fe-save"></span></button>
+													</p>	
 													<p>
-														<button type="submit" class="btn btn-success ml-auto" name="save_judge">Сохранить</button>
-													</p>											
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge"><span class= "fe fe-trash"></span></button>
+													</p>										
 												</td>
 												</form>		            
 											</tr>
@@ -426,41 +502,49 @@
 			<div class="my-3 my-md-5">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить пользователя</h3>
 								</div>
 								<div class="card-body">
 									<div class="text-wrap">
-										<p class="text-justify">Данная форма позволяет добавить пользователя в Базу Данных.</p>
 										<form method="POST" action="./#nav-users">
 										{% csrf_token %}
 											<div class="form-group">
-												<label class="form-label">Логин</label>
-												<input type="text" class="form-control" name="username">
-												<label class="form-label">Пароль</label>
-												<input type="text" class="form-control" name="password">
-												<label class="form-label">Тип</label>
-
-												<select class="form-control" name="permission"> 
-													<option value="U">User</option>
-													<option value="J">Judge</option>
-													<option value="O">Operator</option>
-													<option value="A">Administrator</option>
-												</select>
+											<div class="row">
+												<div class ="col">
+													<label class="form-label">Логин</label>
+													<input type="text" class="form-control" name="username">
+												</div>
+												<div class ="col">
+													<label class="form-label">Пароль</label>
+													<input type="text" class="form-control" name="password">
+												</div>
+												<div class ="col">
+													<label class="form-label">Тип</label>
+													<select class="custom-select" name="permission"> 
+														<option value="U">User</option>
+														<option value="J">Judge</option>
+														<option value="O">Operator</option>
+														<option value="A">Administrator</option>
+													</select>
 												<!--<input type="text" class="form-control" name="permission">-->
-												<label class="form-label">ID</label>
-												<select class="form-control" name="judgeid"> {% if judges.count > 0 %}
-													{% for judge in judges %}
-											   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
-											    	{% endfor %}
-											    {% endif %}
-											   	</select>		
+												</div>
+												<div class ="col">
+													<label class="form-label">ID</label>
+													<select class="custom-select" name="judgeid"> {% if judges.count > 0 %}
+														{% for judge in judges %}
+															<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
+														{% endfor %}
+													{% endif %}
+													</select>		
+												</div>
+											</div>
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
-													
+													<p class="text-justify">Данная форма позволяет добавить пользователя в Базу Данных.</p>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit5">Сохранить</button>
 												</div>
 											</div>
@@ -469,7 +553,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Список пользователей</h3>
@@ -491,11 +575,11 @@
 												<form method="POST">
 												{% csrf_token %}
 												<input type="hidden" name="user_id" value={{ user.id }}>
-												<td><input type="text" class="form-control" name="user_id_field" value="{{ user.id }}" disabled></td>
+												<td><p class="text-center">{{ user.id }}</p></td>
 												<td><input type="text" class="form-control" name="user_username_field" value="{{ user.username }}"></td>
 												<td><input type="text" class="form-control" name="user_password_field" value="{{ user.password }}"></td>
 												<td>
-												<select size="1" name="user_permission_field"> 
+												<select class="custom-select" size="1" name="user_permission_field"> 
 													<option {% if user.permission == "U" %} selected {% endif %} value="U">User</option>
 													<option {% if user.permission == "J" %} selected {% endif %} value="J">Judge</option>
 													<option {% if user.permission == "O" %} selected {% endif %} value="O">Operator</option>
@@ -505,10 +589,10 @@
 												<td><input type="text" class="form-control" name="user_judgeid_field" value="{{ user.judgeid }}"></td>
 												<td>
 													<p>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_user">Удалить</button>
+														<button type="submit" class="btn btn-success ml-auto" name="save_user"><span class= "fe fe-save"></span></button>
 													</p>
 													<p>
-														<button type="submit" class="btn btn-success ml-auto" name="save_user">Сохранить</button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_user"><span class= "fe fe-trash"></span></button>
 													</p>											
 												</td>
 												</form>		                  
