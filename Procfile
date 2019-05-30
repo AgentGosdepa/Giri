@@ -1,1 +1,1 @@
-web: gunicorn korova.wsgi --log-file -
+web: gunicorn bsbd_kurs.wsgi --log-file -
