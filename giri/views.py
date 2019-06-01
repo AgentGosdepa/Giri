@@ -44,6 +44,12 @@ def index(request):
 			login = request.POST.get("login")
 			password = request.POST.get("password")
 
+		elif ("profile" in request.POST):
+			#sportsman_name = request.POST.get("sportsmen_id")
+			return HttpResponseRedirect("/profile/")
+			#return render (request, "profile.html", {"sportsman_id": sportsman_name})
+			#return render(request, "/profile/", {"sportsman_id": sportsman_name})
+
 	else:
 		return render(request, "index.html", {"sportsmens": Sportsmen.objects.all(), "results": Result.objects.all(), "isauth": request.session.get('isauth', False), "userid": request.session.get('userid', -1),"usertype": request.session.get('usertype', "U")})
 
@@ -69,13 +75,16 @@ def admin(request):
 			region = 				request.POST.get("region")
 			dateofbirth = 			request.POST.get("birthday")
 			category = 				request.POST.get("category")
+			gender = 				request.POST.get("gender")
 
 			sportsmen = Sportsmen.objects.create(name = name,
 			surname = surname,
 			patronymic = patronymic,
 			region = region,
 			dateofbirth = dateofbirth,
-			category = category)
+			category = category,
+			gender = gender
+			)
 #********************************************	
 		elif ('submit2' in request.POST):
 			date =					request.POST.get("date")
@@ -138,6 +147,7 @@ def admin(request):
 			sportsmen.region = request.POST.get("sportsmen_region_field")
 			sportsmen.category = request.POST.get("sportsmen_category_field")
 			sportsmen.dateofbirth = request.POST.get("sportsmen_dateofbirth_field")
+			sportsmen.gender = request.POST.get("sportsmen_gender_field")
 			sportsmen.save()			
 #********************************************	
 		elif ('delete_competition' in request.POST):
@@ -391,5 +401,7 @@ def logout(request):
 
 # Profile form page
 def profile(request):
+	username = request.POST.get("username")
+
 	return render(request, "profile.html", {"results": Result.objects.all(),
 	"competitions": Competition.objects.all()})
