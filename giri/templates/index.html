@@ -61,7 +61,7 @@
 								</tr>
 							</thead>
 							{% for sportsmen in sportsmens %}
-							<form id="submitForm" method="POST" action="/">                     
+							<form method="POST">                     
 							<tbody>
 								
 									{% for result in results %}
@@ -69,13 +69,11 @@
 									{% if result.sportsmenid.id == sportsmen.id %}
 									<td>
 										<div>
-											<a href="/profile/">a</a>
-											<input type="hidden" class="form" name="sportsmen_id" value={{ sportsmen.id }}>
-											<button type="submit1" class="btn btn-link" name="profile">
+											<a href="profile/{{sportsmen.id}}">
 											{{ sportsmen.surname }}
 											{{ sportsmen.name }}
-											{{ sportsmen.patronymic }} 
-											</button>
+											{{ sportsmen.patronymic }}
+											</a> 
 										</div>
 										<div class="small text-muted">
 											{{ sportsmen.region }}

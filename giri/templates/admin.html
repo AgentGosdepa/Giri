@@ -160,11 +160,15 @@
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить соревнование</h3>
+									<div class="card-options">
+										<form method="POST">
+										{% csrf_token %}
+										<button type="submit" class="btn btn-primary ml-auto" name="submit2">Добавить</button>
+									</div>
 								</div>
 								<div class="card-body">
 									<div class="text-wrap">
-										<form method="POST">
-										{% csrf_token %}
+
 											<div class="form-group">
 											<div class="row">
 												<div class ="col">
@@ -181,12 +185,7 @@
 												</div>
 											</div>
 											</div>
-											<div class="card-footer text-right">
-												<div class="d-flex">
-													<p class="text-justify">Данная форма позволяет добавить новое соревнование в Базу Данных.</p>
-													<button type="submit" class="btn btn-primary ml-auto" name="submit2">Сохранить</button>
-												</div>
-											</div>
+
 										</form> 
 									</div>
 								</div>
@@ -223,12 +222,10 @@
 												<td><input type="text" class="form-control" name="competition_place_field" value="{{ competition.place }}"></td>
 												<td><input type="text" class="form-control" name="competition_status_field" value="{{ competition.status }}"></td>
 												<td>
-													<p>
 														<button type="submit" class="btn btn-success ml-auto" name="save_competition"><span class= "fe fe-save"></span></button>
-													</p>
-													<p>
+
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition"><span class= "fe fe-trash"></span></button>
-													</p>
+
 												</td>
 												</form>
 												</td>            
@@ -254,11 +251,15 @@
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить результат</h3>
+									<div class="card-options">
+										<form method="POST">
+										{% csrf_token %}
+										<button type="submit" class="btn btn-primary ml-auto" name="submit4">Добавить</button>
+									</div>
 								</div>
 								<div class="card-body">
 									<div class="text-wrap">
-										<form method="POST">
-										{% csrf_token %}
+
 											<div class="form-group">
 											<div class="row">
 												<div class ="col">
@@ -289,11 +290,11 @@
 											<div class="row">
 												<div class ="col">
 													<label class="form-label">Вес спортсмена</label>
-													<input type="number" class="form-control" name="weightsportsman">
+													<input type="number" class="form-control" name="sportsmanweight">
 												</div>
 												<div class ="col">
 													<label class="form-label">Вес снаряда</label>
-													<input type="number" class="form-control" name="weightgiri">
+													<input type="number" class="form-control" name="giriweight">
 												</div>
 												<div class ="col">
 													<label class="form-label">ID соревнования</label>
@@ -329,12 +330,6 @@
 												</div>
 											</div>
 											</div>
-											<div class="card-footer text-right">
-												<div class="d-flex">
-													<p class="text-justify">Данная форма позволяет добавить новый результат в Базу Данных.</p>
-													<button type="submit" class="btn btn-primary ml-auto" name="submit4">Сохранить</button>
-												</div>
-											</div>
 										</form> 
 									</div>
 								</div>
@@ -363,6 +358,8 @@
 												<th>Фамилия тренера</th>
 												<th>Имя тренера</th>
 												<th>Отчество тренера</th>
+												<th>Вес спортсмена</th>
+												<th>Вес гирь</th>
 												<th></th>
 											</tr>
 
@@ -396,13 +393,12 @@
 												<td><input type="text" class="form-control" size=7 name="result_mastername_field" value="{{ result.mastername }}"></td>
 												<td><input type="text" class="form-control" size=7 name="result_mastersurname_field" value="{{ result.mastersurname }}"></td>
 												<td><input type="text" class="form-control" size=7 name="result_masterpatronymic_field" value="{{ result.masterpatronymic }}"></td>
+												<td></td>
+												<td></td>
 												<td>
-													<p>
 														<button type="submit" class="btn btn-success ml-auto" name="save_result"><span class= "fe fe-save"></span></button>
-													</p>												
-													<p>
+
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_result"><span class= "fe fe-trash"></span></button>
-													</p>
 												</td>    
 												</form>        
 											</tr>
@@ -427,11 +423,14 @@
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить судью</h3>
+									<div class="card-options">
+										<form method="POST">
+										{% csrf_token %}
+										<button type="submit" class="btn btn-primary ml-auto" name="submit3">Добавить</button>
+									</div>
 								</div>
 								<div class="card-body">
 									<div class="text-wrap">
-										<form method="POST">
-										{% csrf_token %}
 											<div class="form-group">
 											<div class="row">
 												<div class ="col">
@@ -447,12 +446,6 @@
 													<input type="text" class="form-control" name="judgepatronymic">
 												</div>
 											</div>
-											</div>
-											<div class="card-footer text-right">
-												<div class="d-flex">
-													<p class="text-justify">Данная форма позволяет добавить судью в Базу Данных.</p>
-													<button type="submit" class="btn btn-primary ml-auto" name="submit3">Сохранить</button>
-												</div>
 											</div>
 										</form> 
 									</div>
@@ -486,12 +479,9 @@
 												<td><input type="text" class="form-control" name="judge_judgename_field" value="{{ judge.judgename }}"></td>
 												<td><input type="text" class="form-control" name="judge_judgepatronymic_field" value="{{ judge.judgepatronymic }}"></td>
 												<td>
-													<p>
 														<button type="submit" class="btn btn-success ml-auto" name="save_judge"><span class= "fe fe-save"></span></button>
-													</p>	
-													<p>
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge"><span class= "fe fe-trash"></span></button>
-													</p>										
+										
 												</td>
 												</form>		            
 											</tr>
@@ -516,14 +506,15 @@
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить пользователя</h3>
-									<div class="card-options">
-										<a href="#" class="card-options-fullscreen" data-toggle="card-fullscreen"><i class="fe fe-maximize"></i></a>
+										<div class="card-options">
+										<form method="POST">
+										{% csrf_token %}
+										<button type="submit" class="btn btn-primary ml-auto" name="submit5">Добавить</button>
 									</div>
 								</div>
 								<div class="card-body">
 									<div class="text-wrap">
-										<form method="POST" action="./#nav-users">
-										{% csrf_token %}
+
 											<div class="form-group">
 											<div class="row">
 												<div class ="col">
@@ -554,12 +545,6 @@
 													</select>		
 												</div>
 											</div>
-											</div>
-											<div class="card-footer text-right">
-												<div class="d-flex">
-													<p class="text-justify">Данная форма позволяет добавить пользователя в Базу Данных.</p>
-													<button type="submit" class="btn btn-primary ml-auto" name="submit5">Сохранить</button>
-												</div>
 											</div>
 										</form> 
 									</div>
@@ -604,12 +589,9 @@
 												</td>
 												<td><input type="text" class="form-control" name="user_judgeid_field" value="{{ user.judgeid }}"></td>
 												<td>
-													<p>
 														<button type="submit" class="btn btn-success ml-auto" name="save_user"><span class= "fe fe-save"></span></button>
-													</p>
-													<p>
+
 														<button type="submit" class="btn btn-danger ml-auto" name="delete_user"><span class= "fe fe-trash"></span></button>
-													</p>											
 												</td>
 												</form>		                  
 											</tr>

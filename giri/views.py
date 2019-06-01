@@ -43,13 +43,6 @@ def index(request):
 		elif ('signin' in request.POST):
 			login = request.POST.get("login")
 			password = request.POST.get("password")
-
-		elif ("profile" in request.POST):
-			#sportsman_name = request.POST.get("sportsmen_id")
-			return HttpResponseRedirect("/profile/")
-			#return render (request, "profile.html", {"sportsman_id": sportsman_name})
-			#return render(request, "/profile/", {"sportsman_id": sportsman_name})
-
 	else:
 		return render(request, "index.html", {"sportsmens": Sportsmen.objects.all(), "results": Result.objects.all(), "isauth": request.session.get('isauth', False), "userid": request.session.get('userid', -1),"usertype": request.session.get('usertype', "U")})
 
@@ -400,8 +393,16 @@ def logout(request):
 	return HttpResponseRedirect("/")
 
 # Profile form page
-def profile(request):
-	username = request.POST.get("username")
-
-	return render(request, "profile.html", {"results": Result.objects.all(),
-	"competitions": Competition.objects.all()})
+def profile(request, id):
+	try:
+		sportsmenid = Sportsmen.objects.get(id = id)
+		return render(request, "profile.html", {"sportsmenid": sportsmenid, 
+			"results": Result.objects.all(),
+			"sportsmens": Sportsmen.objects.all(),
+			"competitions": Competition.objects.all()})
+	except KeyError:
+		return HttpResponseRedirect("Person not found")
+	# ogranichit input
+	#return HttpResponseRedirect("{0}".format(id))
+	#return render(request, "profile.html", {"results": Result.objects.all(),
+	#"competitions": Competition.objects.all()})

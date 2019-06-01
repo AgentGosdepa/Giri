@@ -12,19 +12,22 @@
 		<div class="row">
 			<div class="col-lg-4">
 				<div class="card">
+					{% csrf_token %}
 					<div class="card-body">
 						<div class="card-body text-center">
 							<h3 class="mb-3">
-								Петров Иван Иванович
+								{{sportsmenid.surname}} 
+								{{sportsmenid.name}} 
+								{{sportsmenid.patronymic}}
 							</h3>
 							<p class="mb-4">
-								Категория: 1
+								Категория: {{sportsmenid.category}}
 							</p>
 							<p class="mb-4">
-								Регион: Томская область
+								Регион: {{sportsmenid.region}}
 							</p>
 							<p class="mb-4">
-								День рождения: May 2, 2019
+								День рождения: {{sportsmenid.dateofbirth}}
 							</p>
 						</div>
 
@@ -40,14 +43,17 @@
 					<!--  -->
 					
 					<!-- ТАБЛИЦА -->
-					{% if results.count > 0 %}
+					
 					<table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+						<thead>
 						<tr>
 							<th>Дата</th>
 							<th>Место проведения</th>
 							<th>Статус</th>
 							<th>Результат</th>
 						</tr>
+						</thead>                   
+						<tbody>
 						{% for result in results %}
 						<tr>
 							<td>{{ result.competitionid.date }}</td>
@@ -56,8 +62,10 @@
 							<td>{{ result.result }}</td>          
 						</tr>
 						{% endfor %}
+						</tbody>
 					</table>
-					{% endif %}
+
+
 					<!-- ТАБЛИЦА -->
 					</div>
 			</div>

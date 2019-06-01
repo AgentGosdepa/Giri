@@ -30,6 +30,8 @@ class Result(models.Model):
 	masterpatronymic = models.CharField(max_length = 30)
 	discipline = models.CharField(max_length = 30)
 	platform = models.IntegerField()
+	#wat?
+	#giriweight = models.IntegerField()
 
 class Users(models.Model):
 	usertype = (('U', 'User'), ('J', 'Judge'), ('O', 'Operator'), ('A', 'Administrator'))
