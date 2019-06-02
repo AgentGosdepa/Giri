@@ -8,6 +8,7 @@ class Sportsmen(models.Model):
 	region = models.CharField(max_length = 30)
 	dateofbirth = models.DateField(default = date.today())
 	category = models.CharField(max_length = 30)
+	gender = models.BooleanField()
 
 class Competition(models.Model):
 	date = models.DateField(default = date.today())
@@ -29,6 +30,8 @@ class Result(models.Model):
 	masterpatronymic = models.CharField(max_length = 30)
 	discipline = models.CharField(max_length = 30)
 	platform = models.IntegerField()
+	sportsmenweright = models.FloatField()
+	giriweight = models.IntegerField()
 
 class Users(models.Model):
 	usertype = (('U', 'User'), ('J', 'Judge'), ('O', 'Operator'), ('A', 'Administrator'))
