@@ -2,7 +2,7 @@
 {% block title %}Главная{% endblock title %}
 {% block header %}<!--Главнаяs-->{% endblock header %}
 {% load staticfiles %}
-
+ 
 {% block content %}
 
 
@@ -60,7 +60,8 @@
 									<th>Категория</th>
 								</tr>
 							</thead>
-							{% for sportsmen in sportsmens %}                     
+							{% for sportsmen in sportsmens %}
+							<form method="POST">                     
 							<tbody>
 								
 									{% for result in results %}
@@ -68,11 +69,11 @@
 									{% if result.sportsmenid.id == sportsmen.id %}
 									<td>
 										<div>
-											<a href="/profile/">
+											<a href="profile/{{sportsmen.id}}">
 											{{ sportsmen.surname }}
 											{{ sportsmen.name }}
-											{{ sportsmen.patronymic }} 
-											</a>
+											{{ sportsmen.patronymic }}
+											</a> 
 										</div>
 										<div class="small text-muted">
 											{{ sportsmen.region }}
@@ -84,6 +85,7 @@
 									{% endfor %}
 								</tr>
 							</tbody>
+							</form>
 							{% endfor %}
 						</table>
 						{% endif %}

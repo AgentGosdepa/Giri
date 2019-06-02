@@ -31,7 +31,7 @@
 			<div class="my-3 my-md-5">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить спортсмена</h3>
@@ -42,18 +42,41 @@
 										<form method="POST">
 										{% csrf_token %}
 											<div class="form-group">
-												<label class="form-label">Фамилия</label>
-												<input type="text" class="form-control" name="surname" placeholder="Иванов">
-												<label class="form-label">Имя</label>
-												<input type="text" class="form-control" name="name" placeholder="Иван">
-												<label class="form-label">Отчество</label>
-												<input type="text" class="form-control" name="patronymic" placeholder="Иванович">
-												<label class="form-label">Регион</label>
-												<input type="text" class="form-control" name="region">
-												<label class="form-label">Категория</label>
-												<input type="text" class="form-control" name="category">
-												<label class="form-label">День рождения</label>
-												<input type="date" class="form-control" name="birthday">
+												<div class = "row">
+													<div class ="col">
+														<label class="form-label">Фамилия</label>
+														<input type="text" class="form-control" name="surname" placeholder="Иванов">
+													</div>
+													<div class ="col">
+														<label class="form-label">Имя</label>
+														<input type="text" class="form-control" name="name" placeholder="Иван">
+													</div>
+													<div class ="col">
+														<label class="form-label">Отчество</label>
+														<input type="text" class="form-control" name="patronymic" placeholder="Иванович">
+													</div>
+												</div>
+												<div class = "row">
+													<div class ="col">
+														<label class="form-label">Регион</label>
+														<input type="text" class="form-control" name="region">
+													</div>
+													<div class ="col">
+														<label class="form-label">Категория</label>
+														<input type="text" class="form-control" name="category">
+													</div>
+													<div class ="col">
+														<label class="form-label">День рождения</label>
+														<input type="date" class="form-control" name="birthday">
+													</div>
+													<div class ="col">
+														<label class="form-label">Пол</label>
+														<select class="custom-select" name="gender"> 
+															<option value="man">Мужской</option>
+															<option value="woman">Женщина</option>
+														</select>
+													</div>
+												</div>
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
@@ -65,7 +88,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Список спортсменов</h3>
@@ -77,30 +100,35 @@
 										<table class="table table-hover table-outline table-vcenter text-nowrap card-table"> 
 											<tr>
 												<th>ID</th>
+												<th>Фамилия</th>
 												<th>Имя</th>
+												<th>Отчество</th>
 												<th>Регион</th>
-												<th>День рождения</th>
 												<th>Категория</th>
-												<td></td>
+												<th>День рождения</th>
+												<th></th>
 											</tr>
 											{% for sportsmen in sportsmens %}
 											<tr>
-												<td>{{ sportsmen.id }}</td>
-												<td>{{ sportsmen.surname }}
-												{{ sportsmen.name }}
-												{{ sportsmen.patronymic }}</td>
-												<td>{{ sportsmen.region }}</td>
-												<td>{{ sportsmen.dateofbirth }}</td>
-												<td>{{ sportsmen.category }}</td>
+												<form method="POST">
+												{% csrf_token %}
+												<input type="hidden" class="form" name="sportsmen_id" value={{ sportsmen.id }}>
+												<td><p class="text-center">{{ sportsmen.id }}</p></td>
+												<td><input type="text" class="form-control" size=7 name="sportsmen_surname_field" value="{{ sportsmen.surname }}"></td>
+												<td><input type="text" class="form-control" size=7 name="sportsmen_name_field" value="{{ sportsmen.name }}"></td>
+												<td><input type="text" class="form-control" size=7 name="sportsmen_patronymic_field" value="{{ sportsmen.patronymic }}"></td>
+												<td><input type="text" class="form-control" size=10 name="sportsmen_region_field" value="{{ sportsmen.region }}"></td>
+												<td><input type="text" class="form-control" size=7 name="sportsmen_category_field" value="{{ sportsmen.category }}"></td>
+												<td><input type="date" class="form-control" size=7 name="sportsmen_dateofbirth_field" value="{{ sportsmen.dateofbirth|date:"Y-m-d" }}"></td>
 												<td>
-													<form method="POST">
-														{% csrf_token %}
-														<p>
-														<input type="hidden" name="delete_sp" value={{ sportsmen.id }}>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen"><i class="fe fe-trash"></i></button>
-														</p>
-													</form>
+													<p>
+														<button type="submit" class="btn btn-success ml-auto" name="save_sportsmen"><span class= "fe fe-save"></span></button>
+													</p>
+													<p>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen"><span class= "fe fe-trash"></span></button>
+													</p>
 												</td>
+												</form>
 											</tr>
 											{% endfor %}
 										</table>
@@ -119,7 +147,7 @@
 			<div class="my-3 my-md-5">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить соревнование</h3>
@@ -130,15 +158,24 @@
 										<form method="POST">
 										{% csrf_token %}
 											<div class="form-group">
-												<label class="form-label">Дата проведения</label>
-												<input type="date" class="form-control" name="date">
-												<label class="form-label">Место</label>
-												<input type="text" class="form-control" name="place" placeholder="Томск">
-												<label class="form-label">Статус соревнований</label>
-												<input type="text" class="form-control" name="status" placeholder="Межвузовские">
+											<div class="row">
+												<div class ="col">
+													<label class="form-label">Дата проведения</label>
+													<input type="date" class="form-control" name="date">
+												</div>
+												<div class ="col">
+													<label class="form-label">Место</label>
+													<input type="text" class="form-control" name="place" placeholder="Томск">
+												</div>
+												<div class ="col">
+													<label class="form-label">Статус соревнований</label>
+													<input type="text" class="form-control" name="status" placeholder="Межвузовские">
+												</div>
+											</div>
 											</div>
 											<div class="card-footer text-right">
 												<div class="d-flex">
+													<p class="text-justify">Данная форма позволяет добавить новое соревнование в Базу Данных.</p>
 													<button type="submit" class="btn btn-primary ml-auto" name="submit2">Сохранить</button>
 												</div>
 											</div>
@@ -147,7 +184,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Список соревнований</h3>
@@ -166,18 +203,24 @@
 											</tr>
 											{% for competition in competitions %}
 											<tr>
-												<td>{{ competition.id }}</td>
-												<td>{{ competition.date }}</td>
-												<td>{{ competition.place }}</td>
-												<td>{{ competition.status }}</td>
+												<form method="POST">
+												{% csrf_token %}
+												<input type="hidden" name="competition_id" value={{ competition.id }}>
+												<td><p class="text-center">{{ competition.id }}</p></td>
 												<td>
-													<form method="POST">
-														{% csrf_token %}
-														<p>
-														<input type="hidden" name="delete_comp" value={{ competition.id }}>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition"><i class="fe fe-trash"></i></button>
-														</p>
-													</form>
+													<input type="date" class="form-control" name="competition_date_field" value="{{ competition.date|date:"Y-m-d" }}">
+												</td>
+												<td><input type="text" class="form-control" name="competition_place_field" value="{{ competition.place }}"></td>
+												<td><input type="text" class="form-control" name="competition_status_field" value="{{ competition.status }}"></td>
+												<td>
+													<p>
+														<button type="submit" class="btn btn-success ml-auto" name="save_competition"><span class= "fe fe-save"></span></button>
+													</p>
+													<p>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition"><span class= "fe fe-trash"></span></button>
+													</p>
+												</td>
+												</form>
 												</td>            
 											</tr>
 											{% endfor %}
@@ -198,7 +241,7 @@
 			<div class="my-3 my-md-5">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить результат</h3>
@@ -254,7 +297,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Список результатов</h3>
@@ -314,7 +357,7 @@
 			<div class="my-3 my-md-5">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Добавить судью</h3>
@@ -342,7 +385,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Список судей</h3>

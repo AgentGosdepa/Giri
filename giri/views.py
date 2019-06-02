@@ -43,7 +43,6 @@ def index(request):
 		elif ('signin' in request.POST):
 			login = request.POST.get("login")
 			password = request.POST.get("password")
-
 	else:
 		return render(request, "index.html", {"sportsmens": Sportsmen.objects.all(), "results": Result.objects.all(), "isauth": request.session.get('isauth', False), "userid": request.session.get('userid', -1),"usertype": request.session.get('usertype', "U")})
 
@@ -69,13 +68,16 @@ def admin(request):
 			region = 				request.POST.get("region")
 			dateofbirth = 			request.POST.get("birthday")
 			category = 				request.POST.get("category")
+			gender = 				request.POST.get("gender")
 
 			sportsmen = Sportsmen.objects.create(name = name,
 			surname = surname,
 			patronymic = patronymic,
 			region = region,
 			dateofbirth = dateofbirth,
-			category = category)
+			category = category,
+			gender = gender
+			)
 #********************************************	
 		elif ('submit2' in request.POST):
 			date =					request.POST.get("date")
@@ -138,6 +140,7 @@ def admin(request):
 			sportsmen.region = request.POST.get("sportsmen_region_field")
 			sportsmen.category = request.POST.get("sportsmen_category_field")
 			sportsmen.dateofbirth = request.POST.get("sportsmen_dateofbirth_field")
+			sportsmen.gender = request.POST.get("sportsmen_gender_field")
 			sportsmen.save()			
 #********************************************	
 		elif ('delete_competition' in request.POST):
@@ -390,6 +393,16 @@ def logout(request):
 	return HttpResponseRedirect("/")
 
 # Profile form page
-def profile(request):
-	return render(request, "profile.html", {"results": Result.objects.all(),
-	"competitions": Competition.objects.all()})
+def profile(request, id):
+	try:
+		sportsmenid = Sportsmen.objects.get(id = id)
+		return render(request, "profile.html", {"sportsmenid": sportsmenid, 
+			"results": Result.objects.all(),
+			"sportsmens": Sportsmen.objects.all(),
+			"competitions": Competition.objects.all()})
+	except KeyError:
+		return HttpResponseRedirect("Person not found")
+	# ogranichit input
+	#return HttpResponseRedirect("{0}".format(id))
+	#return render(request, "profile.html", {"results": Result.objects.all(),
+	#"competitions": Competition.objects.all()})
