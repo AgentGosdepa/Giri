@@ -215,7 +215,7 @@
 												<form method="POST">
 												{% csrf_token %}
 												<input type="hidden" name="competition_id" value={{ competition.id }}>
-												<td><p class="text-center">{{ competition.id }}</p></td>
+												<td><span class="text-muted">{{ competition.id }}</span></td>
 												<td>
 													<input type="date" class="form-control" name="competition_date_field" value="{{ competition.date|date:"Y-m-d" }}">
 												</td>
@@ -369,7 +369,7 @@
 												{% csrf_token %}
 												<input type="hidden" name="result_id" value={{ result.id }}>
 												<td>
-													{{ result.id }}
+													<span class="text-muted">{{ result.id }}</span>
 												</td>
 												<td>
 													{{ result.sportsmenid.id }} ({{ result.sportsmenid.surname }} {{ result.sportsmenid.name }} {{ result.sportsmenid.patronymic }})
@@ -474,7 +474,7 @@
 												<form method="POST">
 												{% csrf_token %}
 												<input type="hidden" name="judge_id" value={{ judge.id }}>
-												<td><p class="text-center">{{ judge.id }}</p></td>
+												<td><span class="text-muted">{{ judge.id }}</snap></td>
 												<td><input type="text" class="form-control" name="judge_judgesurname_field" value="{{ judge.judgesurname }}"></td>
 												<td><input type="text" class="form-control" name="judge_judgename_field" value="{{ judge.judgename }}"></td>
 												<td><input type="text" class="form-control" name="judge_judgepatronymic_field" value="{{ judge.judgepatronymic }}"></td>
@@ -576,7 +576,7 @@
 												<form method="POST">
 												{% csrf_token %}
 												<input type="hidden" name="user_id" value={{ user.id }}>
-												<td><p class="text-center">{{ user.id }}</p></td>
+												<td><span class="text-muted">{{ user.id }}</snap></td>
 												<td><input type="text" class="form-control" name="user_username_field" value="{{ user.username }}"></td>
 												<td><input type="text" class="form-control" name="user_password_field" value="{{ user.password }}"></td>
 												<td>

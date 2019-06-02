@@ -23,7 +23,13 @@
 									{{sportsmenid.surname}} 
 									{{sportsmenid.name}} 
 									{{sportsmenid.patronymic}}
-									<small class="text-muted mt-1" style="font:9px;">{{sportsmenid.gender}}</small>
+									<small class="text-muted mt-1" style="font:9px;">
+									{% if sportsmenid.gender == True %}
+										муж.
+									{% else %}
+										жен.
+									{% endif %}
+								</small>
 								</h3>
 								<h4 class="text-muted mb-2">
 									{{sportsmenid.region}} - {{sportsmenid.dateofbirth}}
@@ -66,19 +72,30 @@
 							</tr>
 							</thead>                   
 							<tbody>
-							{% for result in results %}
+								{% for result in results %}
+								{% if result.sportsmenid.id == sportsmenid.id %}
 							<tr>
 								<td>{{ result.competitionid.date }}</td>
 								<td>{{ result.competitionid.id }} ({{ result.competitionid.place }})</td>
 								<td>{{ result.competitionid.status }}</td>
 								<td>{{ result.result }}</td>          
 							</tr>
-							{% endfor %}
+								{% endif %}
+								{% endfor %}
 							</tbody>
 						</table>
+
 						<!-- ТАБЛИЦА -->
 						</div>
 				</div>
+				<!--
+				<div class="alert alert-icon alert-warning" role="warning">
+					<i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> У спортсмена пока нет результатов соревнований.
+				</div>
+				-->
+
+
+
 			</div>
 		</div>
 	</div>

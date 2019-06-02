@@ -406,7 +406,3 @@ def profile(request, id):
 			"competitions": Competition.objects.all()})
 	except KeyError:
 		return HttpResponseRedirect("Спортсмен не найден")
-	# ogranichit input
-	#return HttpResponseRedirect("{0}".format(id))
-	#return render(request, "profile.html", {"results": Result.objects.all(),
-	#"competitions": Competition.objects.all()})

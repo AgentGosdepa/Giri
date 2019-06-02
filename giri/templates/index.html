@@ -64,9 +64,7 @@
 							<form method="POST">                     
 							<tbody>
 								
-									{% for result in results %}
 									<tr>
-									{% if result.sportsmenid.id == sportsmen.id %}
 									<td>
 										<div>
 											<a href="profile/{{sportsmen.id}}">
@@ -81,8 +79,6 @@
 									</td>
 									<td>{{ sportsmen.dateofbirth }}</td>
 									<td>{{ sportsmen.category }}</td>
-									{% endif%}
-									{% endfor %}
 								</tr>
 							</tbody>
 							</form>
