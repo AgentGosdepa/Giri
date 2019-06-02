@@ -125,7 +125,7 @@
 												<td><input type="text" class="form-control" size=7 name="sportsmen_category_field" value="{{ sportsmen.category }}"></td>
 												<td><input type="date" class="form-control" size=7 name="sportsmen_dateofbirth_field" value="{{ sportsmen.dateofbirth|date:"Y-m-d" }}"></td>
 												<td>
-													<span c;ass="text-muted">{{ sportsmen.gender }}</span>
+													<span name="sportsmen_gender_field" class="text-muted">{{ sportsmen.gender }}</span>
 													<!--<select class="custom-select" size=1 name="sportsmen_gender_field">
 														<option value="{{ sportsmen.gender }}"</option>
 												   	</select>-->
@@ -290,7 +290,7 @@
 											<div class="row">
 												<div class ="col">
 													<label class="form-label">Вес спортсмена</label>
-													<input type="number" class="form-control" name="sportsmanweight">
+													<input type="number" class="form-control" name="sportsmenweight">
 												</div>
 												<div class ="col">
 													<label class="form-label">Вес снаряда</label>
@@ -393,8 +393,8 @@
 												<td><input type="text" class="form-control" size=7 name="result_mastername_field" value="{{ result.mastername }}"></td>
 												<td><input type="text" class="form-control" size=7 name="result_mastersurname_field" value="{{ result.mastersurname }}"></td>
 												<td><input type="text" class="form-control" size=7 name="result_masterpatronymic_field" value="{{ result.masterpatronymic }}"></td>
-												<td></td>
-												<td></td>
+												<td>{{ result.sportsmenweight }}</td>
+												<td>{{ result.giriweight }}</td>
 												<td>
 														<button type="submit" class="btn btn-success ml-auto" name="save_result"><span class= "fe fe-save"></span></button>
 

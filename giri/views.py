@@ -106,7 +106,9 @@ def admin(request):
 			mastersurname = 		request.POST.get("mastersurname")
 			masterpatronymic = 		request.POST.get("masterpatronymic")
 			discipline = 			request.POST.get("discipline")			
-			platform = 			request.POST.get("platform")
+			platform = 				request.POST.get("platform")
+			sportsmenweight = 		request.POST.get("sportsmenweight")
+			giriweight = 			request.POST.get("giriweight")
 
 			result = Result.objects.create(sportsmenid = Sportsmen.objects.get(id = sportsmenid),
 			competitionid = Competition.objects.get(id = competitionid),
@@ -116,7 +118,9 @@ def admin(request):
 			mastersurname = mastersurname, 
 			masterpatronymic = masterpatronymic, 
 			discipline = discipline,
-			platform = platform)	
+			platform = platform,
+			sportsmenweight = sportsmenweight,
+			giriweight = giriweight)	
 #********************************************		
 		elif ('submit5' in request.POST):
 			username = 					request.POST.get("username")
@@ -401,7 +405,7 @@ def profile(request, id):
 			"sportsmens": Sportsmen.objects.all(),
 			"competitions": Competition.objects.all()})
 	except KeyError:
-		return HttpResponseRedirect("Person not found")
+		return HttpResponseRedirect("Спортсмен не найден")
 	# ogranichit input
 	#return HttpResponseRedirect("{0}".format(id))
 	#return render(request, "profile.html", {"results": Result.objects.all(),
