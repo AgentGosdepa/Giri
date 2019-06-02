@@ -67,7 +67,7 @@ def admin(request):
 			patronymic = 			request.POST.get("patronymic")
 			region = 				request.POST.get("region")
 			dateofbirth = 			request.POST.get("birthday")
-			category = 				request.POST.get("category")
+			#category = 				request.POST.get("category")
 			gender = 				request.POST.get("gender")
 
 			sportsmen = Sportsmen.objects.create(name = name,
@@ -75,7 +75,7 @@ def admin(request):
 			patronymic = patronymic,
 			region = region,
 			dateofbirth = dateofbirth,
-			category = category,
+			#category = category,
 			gender = gender
 			)
 #********************************************	
@@ -142,7 +142,7 @@ def admin(request):
 			sportsmen.name = request.POST.get("sportsmen_name_field")
 			sportsmen.patronymic = request.POST.get("sportsmen_patronymic_field")
 			sportsmen.region = request.POST.get("sportsmen_region_field")
-			sportsmen.category = request.POST.get("sportsmen_category_field")
+			#sportsmen.category = request.POST.get("sportsmen_category_field")
 			sportsmen.dateofbirth = request.POST.get("sportsmen_dateofbirth_field")
 			sportsmen.gender = request.POST.get("sportsmen_gender_field")
 			sportsmen.save()			
@@ -219,14 +219,15 @@ def operator(request):
 			patronymic = 			request.POST.get("patronymic")
 			region = 				request.POST.get("region")
 			dateofbirth = 			request.POST.get("birthday")
-			category = 				request.POST.get("category")
+			#category = 				request.POST.get("category")
 
 			sportsmen = Sportsmen.objects.create(name = name,
 			surname = surname,
 			patronymic = patronymic,
 			region = region,
 			dateofbirth = dateofbirth,
-			category = category)
+			#category = category
+			)
 #********************************************	
 		elif ('submit2' in request.POST):
 			date =					request.POST.get("date")

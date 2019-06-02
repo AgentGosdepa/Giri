@@ -63,10 +63,10 @@
 														<label class="form-label">Регион</label>
 														<input type="text" class="form-control" name="region">
 													</div>
-													<div class ="col">
+													<!--<div class ="col">
 														<label class="form-label">Категория</label>
 														<input type="text" class="form-control" name="category">
-													</div>
+													</div>-->
 													<div class ="col">
 														<label class="form-label">День рождения</label>
 														<input type="date" class="form-control" name="birthday">
@@ -104,7 +104,7 @@
 												<th>Имя</th>
 												<th>Отчество</th>
 												<th>Регион</th>
-												<th>Категория</th>
+												<!--<th>Категория</th>-->
 												<th>День рождения</th>
 												<th>Пол</th>
 												<th></th>
@@ -122,13 +122,14 @@
 												<td><input type="text" class="form-control" size=7 name="sportsmen_name_field" value="{{ sportsmen.name }}"></td>
 												<td><input type="text" class="form-control" size=7 name="sportsmen_patronymic_field" value="{{ sportsmen.patronymic }}"></td>
 												<td><input type="text" class="form-control" size=10 name="sportsmen_region_field" value="{{ sportsmen.region }}"></td>
-												<td><input type="text" class="form-control" size=7 name="sportsmen_category_field" value="{{ sportsmen.category }}"></td>
+												<!--<td><input type="text" class="form-control" size=7 name="sportsmen_category_field" value="{{ sportsmen.category }}"></td>-->
 												<td><input type="date" class="form-control" size=7 name="sportsmen_dateofbirth_field" value="{{ sportsmen.dateofbirth|date:"Y-m-d" }}"></td>
 												<td>
-													<span name="sportsmen_gender_field" class="text-muted">{{ sportsmen.gender }}</span>
-													<!--<select class="custom-select" size=1 name="sportsmen_gender_field">
-														<option value="{{ sportsmen.gender }}"</option>
-												   	</select>-->
+													<!--<span name="sportsmen_gender_field" class="text-muted">{{ sportsmen.gender }}</span>-->
+													<select class="custom-select" size=1 name="sportsmen_gender_field">
+														<option {% if sportsmen.gender == True %} selected {% endif %} value="True">Мужской</option>
+														<option {% if sportsmen.gender == False %} selected {% endif %} value="False">Женский</option>
+												   	</select>
 											   </td>
 
 												<td>
@@ -381,7 +382,7 @@
 												<select class="custom-select" size=1 name="result_judgeid_field">
 													{% if judges.count > 0 %}
 														{% for judge in judges %}
-												   			<option value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
+												   			<option {% if result.judgeid == judge %} selected {% endif %} value="{{ judge.id }}">{{ judge.id }} ({{ judge.judgesurname }} {{ judge.judgename }} {{ judge.judgepatronymic }})</option>
 												    	{% endfor %}
 											    	{% endif %}
 											   	</select>
@@ -393,8 +394,8 @@
 												<td><input type="text" class="form-control" size=7 name="result_mastername_field" value="{{ result.mastername }}"></td>
 												<td><input type="text" class="form-control" size=7 name="result_mastersurname_field" value="{{ result.mastersurname }}"></td>
 												<td><input type="text" class="form-control" size=7 name="result_masterpatronymic_field" value="{{ result.masterpatronymic }}"></td>
-												<td>{{ result.sportsmenweight }}</td>
-												<td>{{ result.giriweight }}</td>
+												<td><input type="text" class="form-control" size=3 name="result_sportsmenweight_field" value="{{ result.sportsmenweight }}"></td>
+												<td><input type="text" class="form-control" size=3 name="result_giriweight_field" value="{{ result.giriweight }}"></td>
 												<td>
 														<button type="submit" class="btn btn-success ml-auto" name="save_result"><span class= "fe fe-save"></span></button>
 
