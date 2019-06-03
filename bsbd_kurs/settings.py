@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'bsbd_kurs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -92,7 +92,7 @@ DATABASES = {
 DATABASES = {
     "default": dj_database_url.config(default='postgres://koylzqsmexgvlb:da769538152c9eee26ffc9527a491f8aa5aa76b0520e09ef51064c01c3b83092@ec2-54-195-252-243.eu-west-1.compute.amazonaws.com:5432/d1f3j7laq37da1')
 }
-
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
