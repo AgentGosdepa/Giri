@@ -219,14 +219,14 @@ def operator(request):
 			patronymic = 			request.POST.get("patronymic")
 			region = 				request.POST.get("region")
 			dateofbirth = 			request.POST.get("birthday")
-			#category = 				request.POST.get("category")
+			gender = 				request.POST.get("gender")
 
 			sportsmen = Sportsmen.objects.create(name = name,
 			surname = surname,
 			patronymic = patronymic,
 			region = region,
 			dateofbirth = dateofbirth,
-			#category = category
+			gender = gender
 			)
 #********************************************	
 		elif ('submit2' in request.POST):
@@ -236,7 +236,7 @@ def operator(request):
 
 			competition = Competition.objects.create(date = date, 
 			place = place,
-			status = status)
+			status = status)	
 #********************************************	
 		elif ('submit3' in request.POST):
 			judgename = 			request.POST.get("judgename")
@@ -251,12 +251,16 @@ def operator(request):
 			sportsmenid = 			request.POST.get("sportsmenid")
 			competitionid = 		request.POST.get("competitionid")
 			judgeid = 				request.POST.get("judgeid")
-			result = 0				#request.POST.get("result")
+
+			#if Result.objects.filter(sportsmenid = sportsmenid, competitionid = competitionid, judgeid = judgeid)
+			result = 				0 #request.POST.get("result")
 			mastername = 			request.POST.get("mastername")
 			mastersurname = 		request.POST.get("mastersurname")
 			masterpatronymic = 		request.POST.get("masterpatronymic")
-			discipline = 			request.POST.get("discipline")
+			discipline = 			request.POST.get("discipline")			
 			platform = 				request.POST.get("platform")
+			sportsmenweight = 		request.POST.get("sportsmenweight")
+			giriweight = 			request.POST.get("giriweight")
 
 			result = Result.objects.create(sportsmenid = Sportsmen.objects.get(id = sportsmenid),
 			competitionid = Competition.objects.get(id = competitionid),
@@ -266,23 +270,82 @@ def operator(request):
 			mastersurname = mastersurname, 
 			masterpatronymic = masterpatronymic, 
 			discipline = discipline,
-			platform = platform)
+			platform = platform,
+			sportsmenweight = sportsmenweight,
+			giriweight = giriweight)	
+#********************************************		
+		elif ('submit5' in request.POST):
+			username = 					request.POST.get("username")
+			password = 					request.POST.get("password")
+			permission = 				request.POST.get("permission")
+			judgeid = 					request.POST.get("judgeid")				
+
+			user = Users.objects.create(username = username,
+			password = password,
+			permission = permission,
+			judgeid = judgeid)	
 #********************************************
 		elif ('delete_sportsmen' in request.POST):
-			Sportsmen.objects.get(id = request.POST.get("delete_sp")).delete()
+			Sportsmen.objects.get(id = request.POST.get("sportsmen_id")).delete()
+#********************************************	
+		elif ('save_sportsmen' in request.POST):
+			sportsmen = Sportsmen.objects.get(id = request.POST.get("sportsmen_id"))
+			sportsmen.surname = request.POST.get("sportsmen_surname_field")
+			sportsmen.name = request.POST.get("sportsmen_name_field")
+			sportsmen.patronymic = request.POST.get("sportsmen_patronymic_field")
+			sportsmen.region = request.POST.get("sportsmen_region_field")
+			sportsmen.dateofbirth = request.POST.get("sportsmen_dateofbirth_field")
+			sportsmen.gender = request.POST.get("sportsmen_gender_field")
+			sportsmen.save()			
 #********************************************	
 		elif ('delete_competition' in request.POST):
-			Competition.objects.get(id = request.POST.get("delete_comp")).delete()
+			Competition.objects.get(id = request.POST.get("competition_id")).delete()
+#********************************************	
+		elif ('save_competition' in request.POST):
+			competition = Competition.objects.get(id = request.POST.get("competition_id"))
+			competition.date = request.POST.get("competition_date_field")
+			competition.place = request.POST.get("competition_place_field")
+			competition.status = request.POST.get("competition_status_field")
+			competition.save()			
 #********************************************	
 		elif ('delete_judge' in request.POST):
-			Judge.objects.get(id = request.POST.get("delete_jud")).delete()
+			Judge.objects.get(id = request.POST.get("judge_id")).delete()
+#********************************************	
+		elif ('save_judge' in request.POST):
+			judge = Judge.objects.get(id = request.POST.get("judge_id"))
+			judge.judgename = request.POST.get("judge_judgename_field")
+			judge.judgesurname = request.POST.get("judge_judgesurname_field")
+			judge.judgepatronymic = request.POST.get("judge_judgepatronymic_field")
+			judge.save()
 #********************************************	
 		elif ('delete_result' in request.POST):
-			Result.objects.get(id = request.POST.get("delete_res")).delete()
+			Result.objects.get(id = request.POST.get("result_id")).delete()
+#********************************************	
+		elif ('save_result' in request.POST):
+			result = Result.objects.get(id = request.POST.get("result_id"))
+			result.judgeid = Judge.objects.get(id = request.POST.get("result_judgeid_field"))
+			result.platform = int(request.POST.get("result_platform_field"))
+			#result.result = int(request.POST.get("result_result_field"))
+			result.discipline = request.POST.get("result_discipline_field")
+			result.mastername = request.POST.get("result_mastername_field")
+			result.mastersurname = request.POST.get("result_mastersurname_field")
+			result.masterpatronymic = request.POST.get("result_masterpatronymic_field")
+			result.save()
+#********************************************	
+		elif ('delete_user' in request.POST):
+			Users.objects.get(id = request.POST.get("user_id")).delete()
+#********************************************	
+		elif ('save_user' in request.POST):
+			user = Users.objects.get(id = request.POST.get("user_id"))
+			user.username = request.POST.get("user_username_field")
+			user.password = request.POST.get("user_password_field")
+			user.permission = request.POST.get("user_permission_field")
+			user.judgeid = request.POST.get("user_judgeid_field")
+			user.save()			
 #********************************************	
 	return render(request, "operator.html", {"sportsmens": Sportsmen.objects.all(),
 		"competitions": Competition.objects.all(), "judges": Judge.objects.all(),
-		"results": Result.objects.all(), 
+		"results": Result.objects.all(), #"users": Users.objects.all(), 
 		"isauth": request.session.get('isauth', True), 
 		"userid": request.session.get('userid', -1)})
 
