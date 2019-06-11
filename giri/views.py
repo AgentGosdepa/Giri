@@ -374,7 +374,7 @@ def judge(request):
 			#masterpatronymic = 		request.POST.get("masterpatronymic")
 			#discipline = 			request.POST.get("discipline")
 			#platform = 				request.POST.get("platform")
-
+			
 			try:
 				result = Result.objects.get(sportsmenid = Sportsmen.objects.get(id = sportsmenid),
 				competitionid = Competition.objects.get(id = competitionid),
@@ -383,6 +383,20 @@ def judge(request):
 				result.save()
 			except ObjectDoesNotExist:
 				return HttpResponseRedirect("/judge/")
+				
+#********************************************	
+		elif ('delete_result' in request.POST):
+			Result.objects.get(id = request.POST.get("result_id")).delete()
+#********************************************	
+		elif ('save_result' in request.POST):
+			user = Users.objects.get(id = request.POST.get("user_id"))
+			user.username = request.POST.get("user_username_field")
+			user.password = request.POST.get("user_password_field")
+			user.permission = request.POST.get("user_permission_field")
+			user.judgeid = request.POST.get("user_judgeid_field")
+			user.save()		
+
+
 
 #********************************************	
 		elif ('delete_result' in request.POST):

@@ -79,14 +79,19 @@
 												<td>{{ result.sportsmenid.id }} ({{ result.sportsmenid.surname }} {{ result.sportsmenid.name }} {{ result.sportsmenid.patronymic }})</td>
 												<td>{{ result.competitionid.id }} ({{ result.competitionid.place }})</td>
 												<td>{{ result.judgeid.id }} ({{ result.judgeid.judgesurname }} {{ result.judgeid.judgename }} {{ result.judgeid.judgepatronymic }})</td>
-												<td>{{ result.result }}</td>
+												
+												<form method="POST">
+												{% csrf_token %}
+												<input type="hidden" name="result_id" value={{ result.id }}>
+												<td><input type="text" class="form-control" name="result_result_field" value="{{ result.result }}"></td>
 												<td>
-													<form method="POST">
-														{% csrf_token %}
-														<input type="hidden" name="delete_res" value={{ result.id }}>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_result"><i class="fe fe-trash"></i></button>
-													</form>
-												</td>            
+														<button type="submit" class="btn btn-success ml-auto" name="save_result"><span class= "fe fe-save"></span></button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_result"><span class= "fe fe-trash"></span></button>
+												</td>
+												</form>
+
+
+
 											</tr>
 											{% endfor %}
 										</table>

@@ -37,7 +37,7 @@
 									<div class="card-options">
 										<form method="POST">
 										{% csrf_token %}
-										<button type="submit" class="btn btn-primary ml-auto" name="submit1">Добавить</button>
+										<button type="submit" class="btn btn-primary ml-auto" name="submit1" href="#nav-sportsman">Добавить</button>
 									</div>
 								</div>
 								<div class="card-body">
@@ -133,8 +133,8 @@
 											   </td>
 
 												<td>
-													<button type="submit" class="btn btn-success ml-auto" name="save_sportsmen"><span class= "fe fe-save"></span></button>
-													<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen"><span class= "fe fe-trash"></span></button>
+													<button type="submit" class="btn btn-success ml-auto" name="save_sportsmen" href="#nav-sportsman"><span class= "fe fe-save"></span></button>
+													<button type="submit" class="btn btn-danger ml-auto" name="delete_sportsmen" href="#nav-sportsman"><span class= "fe fe-trash"></span></button>
 												</td>
 												</form>
 											</tr>
@@ -164,7 +164,7 @@
 									<div class="card-options">
 										<form method="POST">
 										{% csrf_token %}
-										<button type="submit" class="btn btn-primary ml-auto" name="submit2">Добавить</button>
+										<button type="submit" class="btn btn-primary ml-auto" name="submit2" href="#nav-competition">Добавить</button>
 									</div>
 								</div>
 								<div class="card-body">
@@ -223,9 +223,9 @@
 												<td><input type="text" class="form-control" name="competition_place_field" value="{{ competition.place }}"></td>
 												<td><input type="text" class="form-control" name="competition_status_field" value="{{ competition.status }}"></td>
 												<td>
-														<button type="submit" class="btn btn-success ml-auto" name="save_competition"><span class= "fe fe-save"></span></button>
+														<button type="submit" class="btn btn-success ml-auto" name="save_competition" href="#nav-competition"><span class= "fe fe-save"></span></button>
 
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition"><span class= "fe fe-trash"></span></button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_competition" href="#nav-competition"><span class= "fe fe-trash"></span></button>
 
 												</td>
 												</form>
@@ -255,7 +255,7 @@
 									<div class="card-options">
 										<form method="POST">
 										{% csrf_token %}
-										<button type="submit" class="btn btn-primary ml-auto" name="submit4">Добавить</button>
+										<button type="submit" class="btn btn-primary ml-auto" name="submit4" href="#nav-results">Добавить</button>
 									</div>
 								</div>
 								<div class="card-body">
@@ -397,9 +397,9 @@
 												<td><input type="text" class="form-control" size=3 name="result_sportsmenweight_field" value="{{ result.sportsmenweight }}"></td>
 												<td><input type="text" class="form-control" size=3 name="result_giriweight_field" value="{{ result.giriweight }}"></td>
 												<td>
-														<button type="submit" class="btn btn-success ml-auto" name="save_result"><span class= "fe fe-save"></span></button>
+														<button type="submit" class="btn btn-success ml-auto" name="save_result" href="#nav-results"><span class= "fe fe-save"></span></button>
 
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_result"><span class= "fe fe-trash"></span></button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_result" href="#nav-results"><span class= "fe fe-trash"></span></button>
 												</td>    
 												</form>        
 											</tr>
@@ -427,7 +427,7 @@
 									<div class="card-options">
 										<form method="POST">
 										{% csrf_token %}
-										<button type="submit" class="btn btn-primary ml-auto" name="submit3">Добавить</button>
+										<button type="submit" class="btn btn-primary ml-auto" name="submit3" href="#nav-judges">Добавить</button>
 									</div>
 								</div>
 								<div class="card-body">
@@ -480,8 +480,8 @@
 												<td><input type="text" class="form-control" name="judge_judgename_field" value="{{ judge.judgename }}"></td>
 												<td><input type="text" class="form-control" name="judge_judgepatronymic_field" value="{{ judge.judgepatronymic }}"></td>
 												<td>
-														<button type="submit" class="btn btn-success ml-auto" name="save_judge"><span class= "fe fe-save"></span></button>
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge"><span class= "fe fe-trash"></span></button>
+														<button type="submit" class="btn btn-success ml-auto" name="save_judge" href="#nav-judges"><span class= "fe fe-save"></span></button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_judge" href="#nav-judges"><span class= "fe fe-trash"></span></button>
 										
 												</td>
 												</form>		            
@@ -510,7 +510,7 @@
 										<div class="card-options">
 										<form method="POST">
 										{% csrf_token %}
-										<button type="submit" class="btn btn-primary ml-auto" name="submit5">Добавить</button>
+										<button type="submit" class="btn btn-primary ml-auto" name="submit5" href=#nav-users>Добавить</button>
 									</div>
 								</div>
 								<div class="card-body">
@@ -590,9 +590,9 @@
 												</td>
 												<td><input type="text" class="form-control" name="user_judgeid_field" value="{{ user.judgeid }}"></td>
 												<td>
-														<button type="submit" class="btn btn-success ml-auto" name="save_user"><span class= "fe fe-save"></span></button>
+														<button type="submit" class="btn btn-success ml-auto" name="save_user" href="#nav-users"><span class= "fe fe-save"></span></button>
 
-														<button type="submit" class="btn btn-danger ml-auto" name="delete_user"><span class= "fe fe-trash"></span></button>
+														<button type="submit" class="btn btn-danger ml-auto" name="delete_user" href="#nav-users"><span class= "fe fe-trash"></span></button>
 												</td>
 												</form>		                  
 											</tr>
